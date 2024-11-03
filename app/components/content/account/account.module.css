@@ -1,0 +1,124 @@
+/* user section */
+.userSection{
+margin-top: 100px;
+}
+/************************************* form */
+/* form */
+.userSection form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: solid white 1px;
+    border-radius: 25px;
+    padding: 45px 25px;
+    margin: 0 auto;
+}
+
+/* all form labels */
+.userSection label {
+    color: white;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* name/email, payment form containers */
+.nameEmailContainer,
+.paymentContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* name/email, payment container inner divs */
+.nameEmailContainer div,
+.paymentContainer div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* update and current subscription buttons */
+.submitButton,
+.userSection input[type="button"] {
+    background-color: rgb(0, 83, 0);
+    border: none;
+    border-radius: 15px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* hover update and current subscription buttons */
+.submitButton:hover,
+.userSection input[type="button"]:hover {
+    background-color: rgb(0, 135, 0);
+    transform: translateY(-3px);
+    box-shadow: 2px 3px 10px -6px white;
+}
+
+/************************************* email/name container */
+/* Name/Email input */
+.nameEmailContainer input {
+   padding: 5px;
+   border-radius: 8px;
+}
+/* Name/Email container last div */
+.nameEmailContainer div:last-of-type {
+    margin-top: 15px;
+}
+
+/************************************* image container */
+.imageContainer{
+    margin-top: 15px;
+}
+/* image container input  */
+.imageContainer input[type="file"] {
+    margin-left: 15px;
+}
+
+/* image and file input */
+.imageContainer div {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+}
+
+/* update button */
+.submitButton {
+    margin-top: 25px;
+    padding: 10px 20px;
+}
+
+/************************************* payment container */
+/* payment */
+.paymentContainer {
+    padding-top: 15px;
+    border-top: 1px solid whitesmoke;
+    margin-top: 20px;
+}
+
+/* current subscription button */
+.paymentContainer input {
+    margin-top: 10px;
+    padding: 10px 15px;
+}
+
+/* Medium devices (landscape laptops, 768px and up) */
+@media only screen and (min-width: 992px) {
+    /* image container */
+    .imageContainer{
+        margin-top: 20px;
+    }
+
+    /* form */
+    .userSection form {
+        padding: 35px;
+        margin-top: 50px;
+    }
+
+    /* all form labels */
+    .userSection label {
+        font-size: 16px;
+    }
+}

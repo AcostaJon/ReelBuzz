@@ -1,0 +1,227 @@
+/* entire section */
+.MovieFrontSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 75px;
+}
+
+/* background image */
+.mediaImage {
+    min-height: 250px;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+
+}
+
+/* details container */
+.detailsContainer {
+    flex-grow: 1;
+    padding: 0 15px;
+    background-color: rgb(0, 0, 0);
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+}
+
+/* logo*/
+.logo {
+    margin-bottom: 5px;
+    font-weight: 200;
+}
+
+/* title */
+.detailsTitleContainer h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* date container */
+.DateContainer {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    color: white;
+}
+
+/* release date */
+.DateContainer p {
+    font-weight: 200;
+}
+
+/* release date, rated */
+.detailsTitleContainer div p,
+.detailsTitleContainer div span {
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+
+/* rated , 18+ */
+.detailsTitleContainer div span {
+    border: solid 1px whitesmoke;
+    padding: 3px;
+    font-size: 12px;
+}
+
+/* image in details container */
+.detailsImage {
+    display: none;
+}
+
+/* video player in details container */
+.detailsPlayer {
+    display: none;
+}
+
+/* overview label */
+.overviewLabel {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+/* overview description */
+.overviewDescription {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 200;
+    line-height: 20px;
+    color: white;
+}
+
+/* user rating label */
+.ratingLabel {
+    margin: 8px 0px 16px 0px;
+}
+
+/* hidden fan, oververiew label and description */
+.hideOnMobileLabel,
+.hideOnMobileDescription {
+    display: none;
+}
+
+/* user rating percentage */
+.ratingPercentage {
+    border-radius: 50%;
+    border: solid 3px green;
+    background-color: whitesmoke;
+    color: green;
+    font-weight: 800;
+    padding: 18px 10px;
+    margin-left: 12px;
+    font-size: 24px;
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* entire section */
+    .MovieFrontSection {
+        margin-bottom: 25px;
+    }
+
+    /* details container */
+    .detailsContainer {
+        border-radius: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 8px;
+    }
+
+    /* hover over details container */
+    .detailsContainer:hover {
+        box-shadow: 2px 2px 10px -1px white;
+    }
+
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    /* entire section */
+    .MovieFrontSection {
+        flex-direction: row;
+        overflow-y: hidden;
+        padding: 5px 0;
+    }
+
+    /* media container */
+    .mediaContainer {
+        display: none;
+    }
+
+    /* details container */
+    .detailsContainer {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    /* title container */
+    .detailsTitleContainer {
+        margin-bottom: 40px;
+    }
+
+    /* media container in details container */
+    .detailsMediaContainer {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        flex-grow: 1;
+    }
+
+    /* image in details container */
+    .detailsImage {
+        display: block;
+        height: 95%;
+        min-width: 290px;
+        width: 294px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 30px;
+    }
+
+    /* video player in details container */
+    .detailsPlayer {
+        display: block;
+        margin-right: 30px;
+    }
+
+    /* overview label */
+    .overviewLabel {
+        display: none;
+    }
+
+    /* overview label - hide on mobile*/
+    .hideOnMobileLabel {
+        font-weight: 800;
+        display: block;
+    }
+
+    /* overview description */
+    .overviewDescription {
+        display: none;
+    }
+
+    /* description - hide on mobile */
+    .hideOnMobileDescription {
+        display: block;
+        color: white;
+    }
+
+    /* user rating label */
+    .ratingLabel {
+        display: none;
+    }
+
+    /* user rating percent */
+    .ratingPercentage {
+        font-size: 38px;
+        padding: 25px 14px;
+    }
+
+}

@@ -1,0 +1,107 @@
+/* show case widget */
+.showCaseWidget{
+    border-radius: 15px;
+    height: 100%;
+    width: 92vw;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    background-size: cover;
+}
+
+/* info box */
+.ContentInfoBox{
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin: 0 12px 8px 12px;
+    background-color: rgba(0, 0, 0, 0.712);
+}
+
+/* logo and title */
+.ContentInfoBox h3,
+.ContentInfoBox h1 {
+    margin: 0;
+}
+
+/* title */
+.ContentInfoBox h1 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+/* logo */
+.ContentInfoBox h3 {
+    font-weight: 200;
+}
+
+/* showcase description box */
+.DateandRating{
+    display: flex;
+    align-items: center;
+}
+
+/* showcase release date */
+.DateandRating p {
+    margin-right: 15px;
+    padding-bottom: 2px;
+    font-weight: 200;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+/* rated */
+.DateandRating span {
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 3px;
+    padding: 5px;
+    font-weight: 800;
+    font-size: 11px;
+}
+
+/* overview */
+.overview {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: 300;
+    width: 85%;
+}
+
+/* more info button */
+.ContentInfoBox button {
+    width: 140px;
+    font-weight: 800;
+    color: white;
+    background-color: rgb(30, 128, 0);
+    border-radius: 15px;
+    border: none;
+    box-shadow: 2px 2px 5px 1px rgb(0, 0, 0);
+    padding: 8px 8px;
+    margin: 0 0 20px 0;
+}
+
+/* more info button on hover */
+.ContentInfoBox button:hover {
+    cursor: pointer;
+    color: rgb(30, 128, 0);
+    background-color: whitesmoke;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .showCaseWidget {
+        height: 95%;
+        width: 28vw;
+    }
+
+    /* showcase content box */
+    .ContentInfoBox {
+        width: 90%;
+        padding: 14px 0px 0px 14px;
+    }
+
+}

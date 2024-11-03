@@ -1,0 +1,143 @@
+/* header */
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 10;
+}
+
+/* header container */
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid .5px rgb(255, 255, 255);
+    padding-top: 12px;
+    padding-bottom: 10px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* username, image container and icons container */
+.leftSide,
+.rightSide {
+    display: flex;
+    align-items: center;
+}
+
+/* user image */
+.leftSide img {
+    margin-right: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+/* email */
+.leftSide h1 {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* name */
+.leftSide h3 {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+/* username and "welcome back" */
+.header h1,
+.header h3 {
+    margin: 0;
+}
+
+/* icons */
+.rightSide svg {
+    width: 18px;
+    fill: rgb(255, 255, 255);
+}
+
+/* hover over icons */
+.rightSide svg:hover {
+    cursor: pointer;
+    fill: rgb(255, 255, 255);
+}
+
+/* hamburger icon */
+.rightSide svg:last-of-type {
+    margin-left: 40px;
+}
+
+/* logout */
+.rightSide button {
+    display: none;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* header */
+    .header {
+        padding-top: 15px;
+    }
+    /* header container */
+    .headerContainer {
+        width: 95%;
+        padding-bottom: 15px;
+    }
+
+    /* user image */
+    .leftSide img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* email */
+    .leftSide h1 {
+        font-size: 16px;
+    }
+
+    /* name */
+    .leftSide h3 {
+        font-size: 12px;
+    }
+
+    /* notifiction/bell icon */
+    .rightSide svg:first-of-type {
+        width: 22px;
+        margin-right: 30px;
+        fill: rgb(128, 128, 128);
+    }
+
+    /* notifiction/bell icon on hover*/
+    .rightSide svg:first-of-type:hover {
+        fill: rgb(255, 255, 255);
+    }
+
+
+    /* hamburger icon */
+    .rightSide svg:last-of-type {
+        display: none;
+    }
+
+    /* logout */
+    .rightSide button {
+        display: block;
+        color: white;
+        cursor: pointer;
+        background-color: red;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+    }
+
+    /* logout on hover */
+    .rightSide button:hover {
+        color: red;
+        background-color: white;
+        
+    }
+
+}
