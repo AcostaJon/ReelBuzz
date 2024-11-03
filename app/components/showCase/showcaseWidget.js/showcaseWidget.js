@@ -37,7 +37,7 @@ export default function ShowCaseWidget(props) {
         <div className={styles.showCaseWidget} style={{ backgroundImage: `linear-gradient(0deg, rgba(255, 255, 255, 0.0), rgba(0, 0, 0, 0.8)), url(https://image.tmdb.org/t/p/original/${props.backgroundImg})` }}>
             <div className={styles.ContentInfoBox} >
                 {/* logo */}
-                <h3>Flix</h3>
+                <h3>Reel Buzz</h3>
                 {/* release date and rated */}
                 <div className={styles.DateandRating}>
                     <p>{props.releaseDate ? formatDate(props.releaseDate) : formatDate(props.firstAir)}</p>
