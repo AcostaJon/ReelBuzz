@@ -103,7 +103,7 @@ export default function App() {
         setTopRatedTvShow(promise.results)
       })
     // get all users, update mongodata state
-    getFetchRequest('api/db/getUsers')
+    getFetchRequest('api/db/getUsers', { cache: 'no-store' })
       .then((data) => {
         setMongoData(data)
       })
@@ -114,7 +114,6 @@ export default function App() {
     // fetch post request
       const response = await fetch('api/db/postUsers', {
       method: 'POST',
-      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -139,7 +138,7 @@ export default function App() {
   };
   // get fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url,{ cache: 'no-store' })
+    const res = await fetch(url)
     const promise = res.json()
     return promise
   }
