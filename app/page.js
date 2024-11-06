@@ -11,7 +11,6 @@ import Dash from "./components/dash/dash.js";
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
-import { revalidatePath } from "next/cache";
 
 export default function App() {
   //***************************************************************** */ state
@@ -117,9 +116,6 @@ export default function App() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
       },
       body: JSON.stringify(obj)
     });
@@ -134,9 +130,6 @@ export default function App() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
       },
       body: JSON.stringify(feedback)
     });
@@ -145,7 +138,7 @@ export default function App() {
   };
   // get fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url)
+    const res = await fetch(url,{ cache: 'no-store' })
     const promise = res.json()
     return promise
   }
@@ -211,9 +204,9 @@ export default function App() {
       await postUserFeedback(review);
 
       // logout
-      setIsUserLoggedIn(false)
-      setEmail("")
-      setFavs([])
+      setIsUserLoggedIn(false);
+      setEmail("");
+      setFavs([]);
       window.location.reload();
 
     }
