@@ -11,7 +11,6 @@ import Dash from "./components/dash/dash.js";
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useRouter } from 'next/router';
 
 export default function App() {
   //***************************************************************** */ state
@@ -63,7 +62,7 @@ export default function App() {
   const [mongodata, setMongoData] = useState("worx")
   // movie front data - object
   const [movieFrontData, setMovieFrontData] = useState({});
-  const router = useRouter();
+
 
   //************************************************************************* */ use effect
   useEffect(() => {
@@ -140,7 +139,7 @@ export default function App() {
   };
   // get fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url)
+    const res = await fetch(url, { cache: 'no-store' })
     const promise = res.json()
     return promise
   }
@@ -209,9 +208,7 @@ export default function App() {
       setIsUserLoggedIn(false);
       setEmail("");
       setFavs([]);
-      router.refresh();
       window.location.reload();
-
     }
 
   }
