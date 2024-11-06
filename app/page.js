@@ -118,8 +118,7 @@ export default function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(obj),
-      cache: 'no-store'
+      body: JSON.stringify(obj)
     });
 
     await response.json();
@@ -133,15 +132,14 @@ export default function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(feedback),
-      cache: 'no-store'
+      body: JSON.stringify(feedback)
     });
 
     await response.json();
   };
   // get fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url, { cache: 'no-store' })
+    const res = await fetch(url)
     const promise = res.json()
     return promise
   }
