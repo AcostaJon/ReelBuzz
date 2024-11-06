@@ -114,6 +114,7 @@ export default function App() {
     // fetch post request
       const response = await fetch('api/db/postUsers', {
       method: 'POST',
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
       },
