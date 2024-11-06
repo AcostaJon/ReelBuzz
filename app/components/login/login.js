@@ -20,7 +20,8 @@ export default function Login() {
     return (
         <div className={styles.loginContainer}>
             {/* heading */}
-            <h1>Millions of movies and TV shows to explore. Check it out now</h1>
+            <h1>Stay Ahead of the Buzz</h1>
+            <h1>Explore the Latest Trailers</h1>
             <h2>create account by signing in &darr;</h2>
             {/* form */}
             <form onSubmit={logginUser}>
