@@ -11,7 +11,6 @@ import Dash from "./components/dash/dash.js";
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useCache } from 'next/cache';
 
 export default function App() {
   //***************************************************************** */ state
@@ -152,9 +151,6 @@ export default function App() {
   const logginUser = async (e) => {
     // stop page refresh
     e.preventDefault();
-    useCache({
-      revalidate: 0, // Disable caching
-    });
 
     // get user email input value
     const email = e.target[0].value
