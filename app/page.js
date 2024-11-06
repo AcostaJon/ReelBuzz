@@ -11,6 +11,7 @@ import Dash from "./components/dash/dash.js";
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
+import { useCache } from 'next/cache';
 
 export default function App() {
   //***************************************************************** */ state
@@ -113,15 +114,16 @@ export default function App() {
   // post new user to mongo database
   const postUser = async (obj) => {
     // fetch post request
-      const response = await fetch('api/db/postUsers', {
+    const response = await fetch('api/db/postUsers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(obj)
+      body: JSON.stringify(obj),
+      cache: 'no-store'
     });
 
-     await response.json();
+    await response.json();
 
   };
   // post user feedback to mongo database
@@ -132,10 +134,11 @@ export default function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(feedback)
+      body: JSON.stringify(feedback),
+      cache: 'no-store'
     });
 
-   await response.json();
+    await response.json();
   };
   // get fetch request
   const getFetchRequest = async (url) => {
@@ -149,6 +152,9 @@ export default function App() {
   const logginUser = async (e) => {
     // stop page refresh
     e.preventDefault();
+    useCache({
+      revalidate: 0, // Disable caching
+    });
 
     // get user email input value
     const email = e.target[0].value
