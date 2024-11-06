@@ -20,7 +20,7 @@ export default function MovieFront() {
     useEffect(() => {
         // get moview trailer if movie title is true - update trailer state
         if (app.movieFrontData.title) {
-            getTrailer(app.movieFrontData.id,'api/movies/getMovieTrailer')
+            getTrailer(app.movieFrontData.id, 'api/movies/getMovieTrailer')
                 .then((promise) => {
                     setTrailer(promise.results[0]);
                 })
@@ -28,7 +28,7 @@ export default function MovieFront() {
 
         // get tv show trailer if tv show name is true - update trailer state
         if (app.movieFrontData.name) {
-            getTrailer(app.movieFrontData.id,'api/tvShows/getTvTrailer')
+            getTrailer(app.movieFrontData.id, 'api/tvShows/getTvTrailer')
                 .then((promise) => {
                     setTrailer(promise.results[0]);
                 })
@@ -97,18 +97,24 @@ export default function MovieFront() {
             <div className={styles.detailsContainer}>
                 {/* title continer */}
                 <div className={styles.detailsTitleContainer}>
-                    <Image src={logo} width={90} height={100} alt="reel buzz logo" />
-                    <h1>{app.movieFrontData.title ? app.movieFrontData.title : app.movieFrontData.name}</h1>
-                    <div className={styles.DateContainer}>
-                        <p>{app.movieFrontData.releaseDate ? formatDate(app.movieFrontData.releaseDate) : formatDate(app.movieFrontData.firstAir)}</p>
-                        <span>{app.movieFrontData.adult ? "18+" : "E"}</span>
+                    <div className={styles.header}>
+                        <div className={styles.titleAndDateContainer}>
+                            <div className={styles.DateContainer}>
+                                <p>{app.movieFrontData.releaseDate ? formatDate(app.movieFrontData.releaseDate) : formatDate(app.movieFrontData.firstAir)}</p>
+                                <span>{app.movieFrontData.adult ? "18+" : "E"}</span>
+                                <p>{app.movieFrontData.title ? "Movie" : "Tv Show"}</p>
+                            </div>
+                            <h1>{app.movieFrontData.title ? app.movieFrontData.title : app.movieFrontData.name}</h1>
+                        </div>
+                        <Image src={logo} width={70} height={90} alt="reel buzz logo" />
                     </div>
-                    <h3 className={styles.hideOnMobileLabel}>Fan Rating <span className={styles.ratingPercentage}>{`${finalRating(app.movieFrontData.rating)}%`}</span> </h3>
-                    <h3 className={styles.hideOnMobileLabel}>Overview</h3>
-                    <p className={styles.hideOnMobileDescription}>{app.movieFrontData.description ? app.movieFrontData.description : "Overview is not available"}</p>
+                    <div className={styles.ratingAndOverview}>
+                        <h3 className={styles.hideOnMobileLabel}>Fan Rating <p className={styles.ratingPercentage}>{`${finalRating(app.movieFrontData.rating)}%`}</p> </h3>
+                        <h3 className={styles.hideOnMobileLabel}>Overview: <p className={styles.hideOnMobileDescription}>{app.movieFrontData.description ? app.movieFrontData.description : "Overview is not available"}</p></h3>
+                    </div>
                 </div>
 
-                {/* media in deatils container */}
+                {/* media in details container */}
                 <div className={styles.detailsMediaContainer} >
                     {/* trailer and background */}
                     {/* ternary operation - if app context containes video(trailer) return video(trailer), if not return image */}
@@ -124,7 +130,7 @@ export default function MovieFront() {
                     }
                     {/*  rating and overview  */}
                     <div className={styles.detailsInfo}>
-                        <h3 className={styles.ratingLabel}>Fan Rating <span className={styles.ratingPercentage}>{`${finalRating(app.movieFrontData.rating)}%`}</span> </h3>
+                        <h3 className={styles.ratingLabel}>Fan Rating: <span className={styles.ratingPercentage}>{`${finalRating(app.movieFrontData.rating)}%`}</span> </h3>
                         <h3 className={styles.overviewLabel}>Overview</h3>
                         <p className={styles.overviewDescription}>{app.movieFrontData.description ? app.movieFrontData.description : "Overview is not available"}</p>
                     </div>

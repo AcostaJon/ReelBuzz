@@ -42,6 +42,7 @@ export default function ShowCaseWidget(props) {
                 <div className={styles.DateandRating}>
                     <p>{props.releaseDate ? formatDate(props.releaseDate) : formatDate(props.firstAir)}</p>
                     <span>{props.adult ? "18+" : "E"}</span>
+                    <p>{props.title ? "Movie" : "Tv Show"}</p>
                 </div>
                 {/* title or name */}
                 <h1>{props.title ? props.title : props.name}</h1>
