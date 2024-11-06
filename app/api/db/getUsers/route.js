@@ -1,7 +1,6 @@
 // get users from mongo db
 // import mongodb objects
 const { MongoClient, ServerApiVersion } = require('mongodb');
-import { revalidatePath } from 'next/cache';
 
 export async function GET() {
 
@@ -27,8 +26,7 @@ export async function GET() {
         const collection = db.collection("Customers")
         // return all documents/user objects as an array
         const allUsers = await collection.find({}).toArray();
-        revalidatePath('https://reel-buzz.vercel.app/');
-
+      
         // return response
         return Response.json(allUsers);
 
