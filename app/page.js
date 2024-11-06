@@ -11,6 +11,7 @@ import Dash from "./components/dash/dash.js";
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 export default function App() {
   //***************************************************************** */ state
@@ -115,7 +116,10 @@ export default function App() {
       const response = await fetch('api/db/postUsers', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       },
       body: JSON.stringify(obj)
     });
@@ -129,7 +133,10 @@ export default function App() {
     const response = await fetch('api/db/postUserFeedback', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
       },
       body: JSON.stringify(feedback)
     });
