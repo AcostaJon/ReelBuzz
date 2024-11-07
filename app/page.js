@@ -65,7 +65,7 @@ export default function App() {
 
 
   //************************************************************************* */ use effect
-  useEffect(async () => {
+  useEffect(() => {
     // ********************  update movie state 
     // now playing movies
     getFetchRequest('api/movies/getNowPlaying')
@@ -103,14 +103,13 @@ export default function App() {
       .then((promise) => {
         setTopRatedTvShow(promise.results)
       })
-    const getUsers = async () => {
-      // get all users, update mongodata state
-      await fetch('api/db/getUsers', { cache: 'no-store' })
-        .then((data) => {
-          setMongoData(data)
-        })
+    // get users from mongodb - update state "mongodata" variable
+    const fetchUserData = async () => {
+      const response = await fetch('api/db/getUsers',{cache:'no-store'});
+      const jsonData = await response.json();
+      setMongoData(jsonData);
     }
-    getUsers()
+    fetchUserData();
   }, [])
   //************************************************************************* * fetch requests
   // post new user to mongo database
