@@ -104,7 +104,7 @@ export default function App() {
         setTopRatedTvShow(promise.results)
       })
     // get all users, update mongodata state
-    getFetchRequest('api/db/getUsers', {next: {tags:['users']}})
+    getFetchRequest('api/db/getUsers', {next: {revalidate:30}})
       .then((data) => {
         setMongoData(data)
       })

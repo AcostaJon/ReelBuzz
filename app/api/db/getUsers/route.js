@@ -1,7 +1,6 @@
 // get users from mongo db
 // import mongodb objects
 const { MongoClient, ServerApiVersion } = require('mongodb');
-import { revalidateTag } from 'next/cache';
 
 export async function GET() {
 
@@ -19,7 +18,6 @@ export async function GET() {
 
     // run
     try {
-        revalidateTag('users')
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // connect to database and then to collection
