@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore} from "next/cache";
 // get now playing movies
 export async function GET() {
 
@@ -12,6 +13,7 @@ export async function GET() {
 
     // run
     try {
+        noStore()
 
         // get now playing movies and return data to res variable
         const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options).then((data) => {

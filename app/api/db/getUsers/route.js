@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 // get users from mongo db
 // import mongodb objects
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -18,7 +19,6 @@ export async function GET() {
 
     // run
     try {
-        
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
         // connect to database and then to collection
@@ -26,7 +26,9 @@ export async function GET() {
         const collection = db.collection("Customers")
         // return all documents/user objects as an array
         const allUsers = await collection.find({}).toArray();
-      
+        // purge cache
+        revalidateTag('getUsers')
+
         // return response
         return Response.json(allUsers);
 
