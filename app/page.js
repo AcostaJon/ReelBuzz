@@ -71,45 +71,42 @@ export default function App() {
     getFetchRequest('api/movies/getNowPlaying')
       .then((data) => {
         setNowPlayingMovies(data.results)
-      })
+      });
     // popular movies
     getFetchRequest('api/movies/getPopular')
       .then((data) => {
         setPopularMovies(data.results)
-      })
+      });
     // top rated movies
     getFetchRequest('api/movies/getTopRated')
       .then((promise) => {
         setTopRatedMovies(promise.results)
-      })
+      });
     // upcoming movies
     getFetchRequest('api/movies/getUpcoming')
       .then((promise) => {
         setUpcomingMovies(promise.results)
-      })
+      });
     // *******************  update tv show state 
     // update state - "onTv" variable has value of now playing tv show api call
     getFetchRequest('api/tvShows/getNowPlaying')
       .then((promise) => {
         setOnTv(promise.results)
-      })
+      });
     // update state - "popular" variable has value of popular tv shows api call
     getFetchRequest('api/tvShows/getPopular')
       .then((promise) => {
         setPopularTvShow(promise.results)
-      })
+      });
     // update state - "topRated" variable has value of top rated tv show api call
     getFetchRequest('api/tvShows/getTopRated')
       .then((promise) => {
         setTopRatedTvShow(promise.results)
-      })
-    // get users from mongodb - update state "mongodata" variable
-    const fetchUserData = async () => {
-      const response = await fetch('api/db/getUsers',{cache:'no-store'});
-      const jsonData = await response.json();
-      setMongoData(jsonData);
-    }
-    fetchUserData();
+      });
+    getFetchRequest('api/db/getUsers')
+      .then((promise) => {
+        setMongoData(promise)
+      });
   }, [])
   //************************************************************************* * fetch requests
   // post new user to mongo database
@@ -141,7 +138,7 @@ export default function App() {
   };
   // get fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url)
+    const res = await fetch(url, { next: {tags: ['a'] } });
     const promise = res.json()
     return promise
   }
@@ -154,6 +151,7 @@ export default function App() {
 
     // get user email input value
     const email = e.target[0].value
+    console.log(mongodata)
 
     // if user exists log them in, else create and post user then log in
     if (mongodata.some(obj => obj.email === email)) {

@@ -1,8 +1,11 @@
 // get users from mongo db
 // import mongodb objects
 const { MongoClient, ServerApiVersion } = require('mongodb');
+import { revalidateTag } from 'next/cache'
 
-export async function GET() {
+export async function GET(request) {
+    const tag = request.nextUrl.searchParams.get('a')
+    revalidateTag(tag)
 
     // connection string
     const uri = "mongodb+srv://admin:SXHXFgx0uY6huPAU@customers.culx3.mongodb.net/?retryWrites=true&w=majority&appName=Customers";
