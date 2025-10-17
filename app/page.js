@@ -153,7 +153,7 @@ export default function App() {
     const email = e.target[0].value
 
     // if user exists log them in, else create and post user then log in
-    if (mongodata.some(obj => obj.hasOwnProperty(email))) {
+    if (mongodata.some(obj => obj.email === email)) {
 
       // log user in
       setEmail(email)
