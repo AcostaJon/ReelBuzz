@@ -1,0 +1,43 @@
+/************************************* heart section */
+.heartSection{
+    margin-top: 50px;
+}
+/* header container */
+.headerContainer {
+    text-align: center;
+}
+/* unordered list */
+.heartSection ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 25px;
+    height: 150px;
+    justify-content: center;
+    padding: 0;
+}
+/* list items */
+.heartSection li {
+    height: 100%;
+}
+
+/* list item title/name*/
+.heartSection p {
+    font-size: 8px;
+    text-align: center;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* unordered list */
+    .heartSection ul {
+        height: 350px;
+    }
+
+    /* list item title/name*/
+    .heartSection p {
+        font-size: 16px;
+    }
+
+}

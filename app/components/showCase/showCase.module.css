@@ -1,0 +1,50 @@
+/* show case */
+.showcaseContainer {
+    height: 80vh;
+    margin-bottom: 30px;
+}
+
+/* shocase list */
+.showcaseUl {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    height: 100%;
+    list-style: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    margin: 0 0 0 16px;
+}
+
+/* scrollbar */
+/* width */
+.showcaseUl::-webkit-scrollbar {
+    height: 8px;
+}
+
+/* Handle */
+.showcaseUl::-webkit-scrollbar-thumb {
+    background: #3c3c3c;
+}
+
+/* Handle hover*/
+.showcaseUl::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+ }
+ 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .showcaseContainer {
+        margin-bottom: 15px;
+    }
+
+    /* shocase list */
+    .showcaseUl {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+
+}

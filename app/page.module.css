@@ -1,0 +1,113 @@
+/* logged out main */
+.loggedOutMain {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* nav */
+.loggedOutMain nav {
+    margin-left: 20px;
+}
+
+
+/* title and login -  div */
+.titleAndLogin {
+    flex: 1;
+}
+
+/* heading - h1 (Get total access...)*/
+.getTotalAccess{
+    font-size: 32px;
+    width: 85%;
+    margin: 50px auto 8px;
+    text-align: center;
+}
+
+/* *********** Logged In *********** */
+
+/* Logged In main - top level div */
+.loggedInMain {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* header */
+.loggedInMain header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+}
+
+/* section - displays the main content */
+.loggedInMain section {
+    flex-grow: 2;
+    overflow-x: hidden;
+    margin-bottom: 60px;
+}
+
+/* navigation */
+.loggedInMain nav {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+/* section scroll bar */
+.loggedInMain section::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* section scroll bar thumb handle */
+.loggedInMain section::-webkit-scrollbar-thumb {
+    background-color: rgba(66, 66, 66, 0.884);
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* logged out */
+    /* nav */
+    .loggedOutMain nav {
+        margin-left: 50px;
+        height: 88px;
+    }
+
+    /* *******************logged in******************** */
+
+    /* main - layout formation */
+    .loggedInMain {
+        overflow-y: hidden;
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        grid-template-rows: 80px 1fr;
+        grid-template-areas:
+            "header header"
+            "nav content"
+        ;
+    }
+
+    /* header */
+    .loggedInMain header {
+        grid-area: header;
+    }
+
+    /* section - displays the main content */
+    .loggedInMain section {
+        grid-area: content;
+        margin-bottom: 0;
+        margin-top: 5px;
+        padding-top: 0;
+    }
+
+    /* navigation */
+    .loggedInMain nav {
+        grid-area: nav;
+        position: relative;
+        width: 100%;
+    }
+
+}

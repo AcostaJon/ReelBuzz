@@ -1,0 +1,55 @@
+/* list */
+.ListOfNotifications {
+    width: 300px;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    background-color: rgb(53, 53, 53);
+    color: black;
+    border-radius: 12px;
+    box-shadow: 2px 2px 4px black;
+}
+
+/********** header ***********/
+/* header */
+.header {
+    padding: 15px 12px;
+    color: white;
+    border-bottom: .5px solid rgb(105, 105, 105);
+}
+
+/* header title */
+.header p {
+    font-weight: 400;
+    margin: 0;
+}
+
+/*********** body ************/
+.body {
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* bell image */
+.ListOfNotifications img {
+    width: 100px;
+    height: 50px;
+}
+
+/* body text */
+.body h4 {
+    margin-top: 15px;
+    color: rgb(156, 156, 156);
+}
+
+@media only screen and (min-width:768px) {
+
+    /* list */
+    .ListOfNotifications {
+        width: 350px;
+        position: absolute;
+        top: 70px;
+        left: auto;
+        right: 45px;
+    }
+}

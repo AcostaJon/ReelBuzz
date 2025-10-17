@@ -1,0 +1,109 @@
+/* now playing */
+.nowPlaying {
+    padding-left: 15px;
+    margin-top: 12px;
+}
+
+/* title box */
+.title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-right: 8px;
+}
+
+/* title, see all */
+.title h2,
+.title a {
+    font-size: 14px;
+}
+
+/* title */
+.title h2 {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* see all link */
+.title a {
+    font-weight: 200;
+    margin-bottom: 0;
+    color: rgb(0, 195, 255);
+    text-decoration: none;
+}
+
+/* unordered list */
+.nowPlaying ul {
+    height: 175px;
+    list-style-type: none;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 10px 0;
+    margin-top: 0;
+}
+
+/* list items */
+.nowPlaying li {
+    margin-right: 18px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* list items title */
+.nowPlaying p {
+    font-size: 10px;
+    text-align: center;
+}
+
+/* scrollbar */
+/* width */
+.nowPlaying ul::-webkit-scrollbar {
+    height: 8px;
+}
+
+/* Handle */
+.nowPlaying ul::-webkit-scrollbar-thumb {
+    background: #3c3c3c;
+}
+
+/* Handle hover*/
+.nowPlaying ul::-webkit-scrollbar-thumb:hover {
+   cursor: pointer;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* scrollbar */
+    /* width */
+    .nowPlaying ul::-webkit-scrollbar {
+        height: 8px;
+    }
+
+       /* Handle */
+       .nowPlaying ul::-webkit-scrollbar-thumb {
+        background: #3c3c3c;
+    }
+
+
+    /* title, see all */
+    .title h2,
+    .title a {
+        font-size: 22px;
+        margin-top: 8px;
+    }
+
+    /* unordered list */
+    .nowPlaying ul {
+        height: 350px;
+    }
+
+    /* list items */
+    .nowPlaying p {
+        font-size: 16px;
+    }
+
+
+}

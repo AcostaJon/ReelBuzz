@@ -1,0 +1,96 @@
+/* navigtion */
+.nav {
+    background-color: rgba(65, 3, 3, 0.95);
+}
+
+/* navigation container */
+.nav div:first-of-type {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* navigation unordered list */
+.nav ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    list-style-type: none;
+    height: 50%;
+}
+
+/* list items */
+.nav ul li {
+    cursor: pointer;
+    text-align: center;
+}
+
+/* list item p tags */
+.nav ul li p {
+    /* display: none; */
+    font-size: 10px;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+
+/* icons */
+.nav ul svg {
+    height: 20px;
+}
+
+/* user icon */
+.nav ul li:last-of-type {
+    display: none;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    /* bend corners on navigation */
+    .nav {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .nav:hover {
+        box-shadow: 2px 0px 2px -1px white;
+        background-color: rgba(91, 5, 5, 0.95);
+    }
+
+
+    /* display nav vertical */
+    .nav div:first-of-type {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        height: 90%;
+    }
+
+    .nav ul li{
+        display: flex;
+        align-items: center;
+    }
+
+    /* user icon */
+    .nav ul li:last-of-type {
+        display:flex;
+    }
+
+    /* list item p tags */
+    .nav ul li p {
+        display: block;
+        font-size: 12px;
+    }
+
+    /* icons */
+    .nav ul svg {
+        margin-right: 12px;
+    }
+
+}

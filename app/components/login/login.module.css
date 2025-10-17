@@ -1,0 +1,138 @@
+/* login container */
+.loginContainer {
+    width: 80%;
+    color: white;
+    margin: 50px auto;
+}
+
+/* heading - h1 */
+.loginContainer h1{
+    text-align: center;
+}
+
+
+/* heading - h1 */
+.loginContainer h1:first-of-type {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+/* heading - h1 last of type */
+.loginContainer h1:last-of-type {
+    text-align: center;
+    margin-top: 0;
+    font-size: 26px;
+    font-weight: 200;
+    font-style: oblique;
+}
+
+
+
+/* heading - h2 */
+.loginContainer h2 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: yellow;
+}
+
+/* form */
+.loginContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* form input*/
+.loginContainer form input {
+    padding: 14px 12px;
+    background-color: rgba(0, 0, 0, 0.753);
+    border: .5px solid rgb(70, 70, 70);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    outline: none;
+}
+
+/* form input on focus */
+.loginContainer input:focus {
+    background-color: rgb(39, 39, 39);
+    border: 2px solid rgb(119, 132, 252);
+}
+
+
+/* form submit button signin*/
+.loginContainer form button {
+    padding: 13px;
+    background: linear-gradient(rgb(0, 55, 55), rgb(0, 128, 128));
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width:768px) {
+
+    /* login container */
+    .loginContainer {
+        width: 50%;
+    }
+
+    /* heading - h1 */
+    .loginContainer h1 {
+        font-size: 52px;
+    }
+    /* heading - h1 last of type */
+    .loginContainer h1:last-of-type {
+        font-size: 48px;
+    }
+
+    /* heading - h2 */
+    .loginContainer h2 {
+        margin-bottom: 0px;
+        font-weight: 400;
+        font-size: 16px;
+        color: rgb(0, 0, 0);
+        background-color: yellow;
+        padding: 8px 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        display: none;
+    }
+
+    /* form */
+    .loginContainer form {
+        flex-wrap: wrap;
+    }
+
+    .loginContainer:hover h2 {
+        display: block;
+    }
+
+    .loginContainer:hover input {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    /* form input*/
+    .loginContainer form input {
+        padding: 18px 12px;
+    }
+
+    /* form submit button signin/create account */
+    .loginContainer form button {
+        font-size: 18px;
+        padding: 16px;
+        background: linear-gradient(rgb(0, 55, 55), rgb(0, 91, 91));
+        color: rgb(149, 149, 149);
+    }
+
+    /* form submit button signin/create account on hover */
+    .loginContainer form button:hover {
+        background: linear-gradient(rgb(0, 55, 55), rgb(0, 148, 148));
+        color: rgb(255, 255, 255);
+    }
+
+}
