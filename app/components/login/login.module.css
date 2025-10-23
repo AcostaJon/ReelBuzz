@@ -2,22 +2,27 @@
 .loginContainer {
     width: 80%;
     color: white;
-    margin: 150px auto;
+    margin: 100px auto;
     text-align: center;
 }
 
 /* heading - h1 */
-.loginContainer h1{
+.loginContainer h1 {
     font-weight: 800;
-    margin-bottom: 0;
+    margin-bottom: 75;
 }
 
-/* heading - h2 */
-.loginContainer h2 {
+/* heading - h4 */
+.loginContainer h4 {
     margin-bottom: 5px;
     font-size: 14px;
     text-align: center;
     color: yellow;
+}
+
+/* paragraph - p */
+.loginContainer p {
+    display: none;
 }
 
 /* form */
@@ -66,14 +71,16 @@
     /* heading - h1 */
     .loginContainer h1 {
         font-size: 52px;
+        margin-bottom: 0;
     }
+
     /* heading - h1 last of type */
     .loginContainer h1:last-of-type {
         font-size: 48px;
     }
 
-    /* heading - h2 */
-    .loginContainer h2 {
+    /* heading - h4 */
+    .loginContainer h4 {
         margin-bottom: 0px;
         font-weight: 400;
         font-size: 16px;
@@ -85,13 +92,19 @@
         display: none;
     }
 
+      /* hover over login form show user alert */
+      .loginContainer:hover h4 {
+        display: block;
+    }
+
+    /* paragraph - p */
+    .loginContainer p {
+        display: block;
+    }
+
     /* form */
     .loginContainer form {
         flex-wrap: wrap;
-    }
-
-    .loginContainer:hover h2 {
-        display: block;
     }
 
     .loginContainer:hover input {
