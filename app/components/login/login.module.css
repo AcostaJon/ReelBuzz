@@ -2,32 +2,15 @@
 .loginContainer {
     width: 80%;
     color: white;
-    margin: 50px auto;
+    margin: 150px auto;
+    text-align: center;
 }
 
 /* heading - h1 */
 .loginContainer h1{
-    text-align: center;
-}
-
-
-/* heading - h1 */
-.loginContainer h1:first-of-type {
-    text-align: center;
     font-weight: 800;
     margin-bottom: 0;
 }
-
-/* heading - h1 last of type */
-.loginContainer h1:last-of-type {
-    text-align: center;
-    margin-top: 0;
-    font-size: 26px;
-    font-weight: 200;
-    font-style: oblique;
-}
-
-
 
 /* heading - h2 */
 .loginContainer h2 {

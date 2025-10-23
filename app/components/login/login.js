@@ -20,13 +20,13 @@ export default function Login() {
     return (
         <div className={styles.loginContainer}>
             {/* heading */}
-            <h1>Stay Ahead of the Buzz</h1>
-            <h1>Explore the Latest Trailers</h1>
+            <h1>Watch the Latest Trailers Instantly</h1>
+            <p>Explore the newest TV shows and movie trailers from around the world — all in one cinematic hub.</p>
             <h2>create account by signing in &darr;</h2>
             {/* form */}
             <form onSubmit={logginUser}>
                 <input id="email" type="email" placeholder="email" required />
-                <button>Start watching</button>
+                <button>ENTER</button>
             </form>
         </div>
 
