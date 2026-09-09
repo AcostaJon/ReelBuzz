@@ -140,7 +140,7 @@ export default function SearchableList({ videos }) {
                 <section>
                     {/* show all movies and shows */}
                     <div>
-                        <img src="offCanvasSearchimg.png"  class="img-fluid mt-4" />
+                        <img src="offCanvasSearchimg.png"  className="img-fluid mt-4" />
                     </div>
                 </section>
             </>

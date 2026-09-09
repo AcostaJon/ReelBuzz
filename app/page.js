@@ -540,11 +540,11 @@ export default function App() {
                     <a className="nav-link" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
                   </li>
                   <li className="d-none d-lg-flex">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                    <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
                   </li>
                 </ul>
                 {/* search button */}
-                <button type="button" class="btn btn-warning" data-bs-toggle="offcanvas"   data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"}  width={50}/></button>
+                <button type="button" className="btn btn-warning" data-bs-toggle="offcanvas"   data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"}  width={50}/></button>
                 {/* offcanvas */}
                 <div className="offcanvas offcanvas-start bg-dark" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                   {/* offcanvas header */}

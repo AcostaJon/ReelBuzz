@@ -117,8 +117,8 @@ export default function MovieFront() {
                     <p className='my-4 text-white-50'>{app.movieFrontData.description ? app.movieFrontData.description : "Overview is not available"}</p>
                 </div>
                 {/* cast */}
-                <div class="container text-center p-lg-3">
-                    <div class="row g-2 g-lg-4 justify-content-between">
+                <div className="container text-center p-lg-3">
+                    <div className="row g-2 g-lg-4 justify-content-between">
                         <h1 className='fw-bold'>Cast</h1>
                         {
                             credits?.map((actor) =>
