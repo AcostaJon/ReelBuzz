@@ -1,6 +1,6 @@
-// route handler: get now playing movies
+// route handler: Get a list of TV shows that air in the next 7 days
 export async function GET() {
-    //TMDB options object
+    // TMDB options object
     const options = {
         method: 'GET',
         headers: {
@@ -11,18 +11,16 @@ export async function GET() {
 
     // run
     try {
-        // fetch now playing movies 
-        const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US', options).then((data) => {
-            return data.json();
+        // fetch popular tv shows 
+        const res = await fetch('https://api.themoviedb.org/3/tv/on_the_air?language=en-US', options).then((data) => {
+            return data.json()
         })
 
-        // return now playing movies
-        return Response.json(res);
+        // return popular tv shows
+        return Response.json(res)
     }
     // catch and throw any errors
     catch (error) {
         throw new Error('Failed to fetch data, ' + error)
     }
-
 }
-

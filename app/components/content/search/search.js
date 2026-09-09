@@ -33,7 +33,7 @@ export default function Search() {
         // update "userInput" state variable - user input
         setUserInput(e.target.value)
 
-        //*********  filter arrays ************/
+        //*********  filter arrays first letter lowercase ************/
         let filteredNowMovies = nowPlayingMovies.filter(function (movie) {
             return movie.title.toLocaleLowerCase().includes(userInput)
         })

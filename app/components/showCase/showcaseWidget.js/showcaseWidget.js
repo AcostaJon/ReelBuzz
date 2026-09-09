@@ -14,7 +14,7 @@ export default function ShowCaseWidget(props) {
     // ************************************************ events
     // handle onClick - "more info" button
     function moreInfo() {
-        app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.overview, props.adult, props.id)
+        app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.overview, props.adult, props.id, props.voteCount)
     }
 
     // format release date - mm-dd-yyyy

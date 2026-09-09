@@ -19,7 +19,7 @@ export default function MovieWidget(props) {
 
     // handle open movie
     const handleOpenMovie = (e) => {
-        app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.description, props.adult, props.id)
+        app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.description, props.adult, props.id, props.voteCount)
     }
 
     return (

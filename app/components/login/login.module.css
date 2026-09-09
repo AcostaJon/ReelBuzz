@@ -1,45 +1,55 @@
 /* login container */
 .loginContainer {
-    width: 80%;
     color: white;
-    margin: 100px auto;
+    margin: 0px auto;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-/* heading - h1 */
-.loginContainer h1 {
-    font-weight: 800;
-    margin-bottom: 75;
-}
+/* title subheading - h3 */
+.loginContainer h3 {
+    font-size: 1rem;
+    margin: 0 0 5px 0;
+    color: #ffffff; /* Muted gray text */
+    font-weight: 900; /* Extra black/bold */
+    letter-spacing: -0.05em; /* Tight letter tracking */
 
-/* heading - h4 */
-.loginContainer h4 {
-    margin-bottom: 5px;
-    font-size: 14px;
-    text-align: center;
-    color: yellow;
 }
 
 /* paragraph - p */
 .loginContainer p {
-    display: none;
+    color: rgb(184, 184, 184);
 }
 
-/* form */
+/******************************************** form */
 .loginContainer form {
     display: flex;
     flex-direction: column;
+    background-color: #014949e1;
+    padding: 20px 24px 25px 24px;
+    border-radius: 6px;
 }
 
-/* form input*/
+/* form title */
+.loginContainer form h4 {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+/* form inputs*/
 .loginContainer form input {
     padding: 14px 12px;
-    background-color: rgba(0, 0, 0, 0.753);
-    border: .5px solid rgb(70, 70, 70);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    border: .5px solid rgb(255, 255, 255);
+    border-radius: 6px;
     color: white;
     outline: none;
+    margin-bottom: 16px;
+}
+
+/* form input placeholder*/
+.loginContainer form input::placeholder {
+    color: white;
 }
 
 /* form input on focus */
@@ -48,87 +58,87 @@
     border: 2px solid rgb(119, 132, 252);
 }
 
+/* forgot pasword container */
+.loginContainer div:first-of-type {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
 
-/* form submit button signin*/
+
+/* forgot password link */
+.loginContainer div a {
+    color: white;
+    font-size: 12px;
+}
+
+/* form buttons */
 .loginContainer form button {
     padding: 13px;
-    background: linear-gradient(rgb(0, 55, 55), rgb(0, 128, 128));
-    color: rgb(255, 255, 255);
-    font-weight: 600;
     border: none;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    box-shadow: black 2px 2px;
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
     cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* form Login button*/
+.loginContainer form button:first-of-type {
+    background-color: green;
+}
+
+/* form sign up button*/
+.loginContainer form button:last-of-type {
+    background-color: #CE9E00;
+    box-shadow: black 2px 2px;
 }
 
 @media only screen and (min-width:768px) {
-
-    /* login container */
     .loginContainer {
-        width: 50%;
+        margin-bottom: 20px;
     }
 
-    /* heading - h1 */
-    .loginContainer h1 {
-        font-size: 52px;
-        margin-bottom: 0;
-    }
-
-    /* heading - h1 last of type */
-    .loginContainer h1:last-of-type {
-        font-size: 48px;
-    }
-
-    /* heading - h4 */
-    .loginContainer h4 {
-        margin-bottom: 0px;
-        font-weight: 400;
-        font-size: 16px;
-        color: rgb(0, 0, 0);
-        background-color: yellow;
-        padding: 8px 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        display: none;
-    }
-
-      /* hover over login form show user alert */
-      .loginContainer:hover h4 {
-        display: block;
-    }
-
-    /* paragraph - p */
-    .loginContainer p {
-        display: block;
-    }
-
-    /* form */
+    /************************************** form */
     .loginContainer form {
-        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        background-color: #014949e1;
+        padding: 24px 24px 50px 24px;
+        border-radius: 6px;
     }
 
-    .loginContainer:hover input {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+    /* form title */
+    .loginContainer form h4 {
+        font-size: 1.5rem;
     }
 
-    /* form input*/
-    .loginContainer form input {
-        padding: 18px 12px;
+    /* form inputs*/
+    .emailInput,
+    .passwordInput {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* form submit button signin/create account */
-    .loginContainer form button {
-        font-size: 18px;
-        padding: 16px;
-        background: linear-gradient(rgb(0, 55, 55), rgb(0, 91, 91));
-        color: rgb(149, 149, 149);
+    /* forgot pasword container */
+    .checkboxpasswordContainer {
+        width: 80%;
+        margin: 0 auto;
+        flex-grow: 0;
     }
 
-    /* form submit button signin/create account on hover */
-    .loginContainer form button:hover {
-        background: linear-gradient(rgb(0, 55, 55), rgb(0, 148, 148));
-        color: rgb(255, 255, 255);
+    .checkboxContainer label {
+        width: 150px;
+        text-align: start;
+    }
+
+    /* form button Login*/
+    .loginContainer form button:first-of-type,
+    .loginContainer form button:last-of-type {
+        width: 60%;
+        margin: 0 auto;
     }
 
 }

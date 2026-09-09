@@ -1,0 +1,10 @@
+.carouselItem{
+    height: 500px;
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .carouselItem{
+        height: 400px;
+    }
+ }

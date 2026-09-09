@@ -1,19 +1,21 @@
 'use client'
 // react
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // context api
 import { AppContext } from "./components/context/context";
 // components
-import ListOfNotifications from "./components/header/notificationList/notificationList";
-import OffCanvasMenu from "./components/header/offCanvasMenu/offCanvasMenu";
 import Login from "./components/login/login";
 import Dash from "./components/dash/dash.js";
+import SearchableList from "./components/searchableList/searchablelist.js"
 // css
 import styles from "./page.module.css";
 import Image from "next/image";
+import ComingSoonSlideShow from "./components/comingSoonSlideShow/comingSoon";
+import SlideShow from "./components/slideShow/slideShow";
 
 export default function App() {
   //***************************************************************** */ state
+  // ************************************************ Movies
   // now playing movies - array
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   // popular movies - array
@@ -21,49 +23,51 @@ export default function App() {
   // top rated movies - array
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   // upcoming movies - array
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [upComingMovies, setUpcomingMovies] = useState([]);
+  // ************************************************ Tv shows
   // tv shows currently on TV - array
   const [onTv, setOnTv] = useState([])
   // popular tv shows - array
-  const [popularTvShow, setPopularTvShow] = useState([])
+  const [comingSoonTv, setComingSoonTv] = useState([])
   // top rated tv shows - array
   const [topRatedTvShow, setTopRatedTvShow] = useState([]);
+  // popular tv shows - array
+  const [popularTvShow, setPopularTvShow] = useState([]);
+  // ************************************************ Favs
   // Favorite movies and shows - array
   const [favs, setFavs] = useState([]);
+  // ************************************************ dashboard navigation 
   // home icon in navigation - boolean
-  const [homeClicked, setHomeClicked] = useState(true);
+  const [showDashHome, setshowDashHome] = useState(true);
   // movie icon in navigation - boolean
-  const [movieClicked, setMovieClicked] = useState(false);
+  const [showMoviesdash, setshowMoviesdash] = useState(false);
   // tv icon in navigation - boolean
-  const [tvShowClicked, setTvShowClicked] = useState(false);
+  const [showTvdash, setshowTvdash] = useState(false);
   // heart icon in navigation - boolean
-  const [heartClicked, setHeartClicked] = useState(false);
+  const [showFavoritesDashboard, setshowFavoritesDashboard] = useState(false);
   // search icon in navigation - boolean
-  const [searchClicked, setSearchClicked] = useState(false);
+  const [showSearchDashboard, setshowSearchDashboard] = useState(false);
   // user icon in navigation - boolean
-  const [userClicked, setUserClicked] = useState(false);
+  const [showUserAccountDashboard, setshowUserAccountDashboard] = useState(false);
   // open Movie
-  const [openMovieClicked, setOpenMovieClicked] = useState(false);
+  const [showContentDashboard, setshowContentDashboard] = useState(false);
   // is the user logged in?
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
-  // notification list - component
-  const [showNotificationList, setNotificationList] = useState(null);
-  // Off canvas menu - component
-  const [offCanvasMenu, setOffCanvasMenu] = useState(null);
-  // username - string
-  const [username, setUsername] = useState("Guest");
   // email - string
   const [email, setEmail] = useState("");
   // user profile picture
-  const [profilePicture, setProfilePicture] = useState("reelBuzzLogo.svg")
+  const [profilePicture, setProfilePicture] = useState("user-regular.svg")
   // preview profile pic - string
   const [preview, setPreview] = useState("user-regular.svg");
   // database of  users
   const [mongodata, setMongoData] = useState("worx")
   // movie front data - object
   const [movieFrontData, setMovieFrontData] = useState({});
-
-
+  // active nav item
+  const [activeMenuItem, setActiveMenuItem] = useState(false);
+  // 1. Initialize the ref container for menu links
+  const linkRefTvShow = useRef(null);
+  const linkRefMovies = useRef(null);
   //************************************************************************* */ use effect
   useEffect(() => {
     // ********************  update movie state 
@@ -94,25 +98,29 @@ export default function App() {
         setOnTv(promise.results)
       });
     // update state - "popular" variable has value of popular tv shows api call
-    getFetchRequest('api/tvShows/getPopular')
+    getFetchRequest('api/tvShows/getComingSoonTv')
       .then((promise) => {
-        setPopularTvShow(promise.results)
+        setComingSoonTv(promise.results)
       });
     // update state - "topRated" variable has value of top rated tv show api call
     getFetchRequest('api/tvShows/getTopRated')
       .then((promise) => {
         setTopRatedTvShow(promise.results)
       });
+    // updat state - "mongoData" variable has all users from database
     getFetchRequest('api/db/getUsers')
       .then((promise) => {
         setMongoData(promise)
       });
+    linkRefTvShow.current.style.textDecoration = "underline"
+    linkRefMovies.current.style.color = "gray"
+    linkRefTvShow.current.style.color = "white"
   }, [])
   //************************************************************************* * fetch requests
-  // post new user to mongo database
-  const postUser = async (obj) => {
-    // fetch post request
-    const response = await fetch('api/db/postUsers', {
+  // log user in request
+  const postLogin = async (obj) => {
+    // fetch Post request
+    const response = await fetch('api/db/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -120,10 +128,24 @@ export default function App() {
       body: JSON.stringify(obj)
     });
 
-    await response.json();
+    return response.json();
 
   };
-  // post user feedback to mongo database
+  // create new user request
+  const newUser = async (obj) => {
+    // fetch Post request
+    const response = await fetch('api/db/newUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj)
+    });
+
+    return response.json();
+
+  };
+  // user feedback request
   const postUserFeedback = async (feedback) => {
     // fetch post request
     const response = await fetch('api/db/postUserFeedback', {
@@ -134,63 +156,93 @@ export default function App() {
       body: JSON.stringify(feedback)
     });
 
-    await response.json();
+    return response.json();
   };
-  // get fetch request
+  // fetch request
   const getFetchRequest = async (url) => {
-    const res = await fetch(url, { next: {tags: ['a'] } });
+    const res = await fetch(url, { next: { tags: ['a'] } });
     const promise = res.json()
     return promise
   }
   //************************************************************************* */ event handlers
-  //*********************************************** */ login/logout
+  //*********************************************** */ Logged out
+
+  // Menu Links 
+  // Movies
+  const activeMenuItemMovies = (e) => {
+    // stop page load
+    e.preventDefault()
+    // remove underline from "tv show" link
+    linkRefTvShow.current.style.textDecoration = "none"
+    // change tvshow link color to gray
+    linkRefTvShow.current.style.color = "gray"
+    // add underline to "movies" link
+    linkRefMovies.current.style.textDecoration = "underline"
+    // change movie link color to white
+    linkRefMovies.current.style.color = "white"
+    // update state
+    setActiveMenuItem(true);
+  }
+  // Tv Shows
+  const activeMenuItemTvShows = (e) => {
+    // stop page load
+    e.preventDefault()
+    // remove underline to "Movies" link
+    linkRefMovies.current.style.textDecoration = "none"
+    // change movies link color to gray
+    linkRefMovies.current.style.color = "gray"
+    // add underline to "tv show" link
+    linkRefTvShow.current.style.textDecoration = "underline"
+    // change tvshow link color to white
+    linkRefTvShow.current.style.color = "white"
+    // update state
+    setActiveMenuItem(false)
+  }
+
+  //******************************************** */ login/logout/new user
   // Login User - handleOnSubmit 
   const logginUser = async (e) => {
     // stop page refresh
     e.preventDefault();
+    const modalBackDrop = document.querySelector('.modal-backdrop')
+    // get the user email and password
+    const emailInput = e.target[0];
+    const email = emailInput.value
+    const passwordInput = e.target[1]
+    const password = passwordInput.value
 
-    // get user email input value
-    const email = e.target[0].value
+    // validate user email and password
+    const user = await postLogin({ email, password })
 
-    // if user exists log them in, else create and post user then log in
-    if (mongodata.some(obj => obj.email === email)) {
-
+    // if status 200, log user in 
+    if (user.status == 200) {
       // log user in
       setEmail(email)
       setIsUserLoggedIn(true)
-      homeDash()
-
+      modalBackDrop.classList.add("d-none");
+      //   homeDash()
     } else {
-
-      // if user does not exist
-      // create user object
-      const user = {
-        email: email
-      }
-
-      // post user object into database
-      await postUser(user)
-
-      // log user in
-      setEmail(email)
-      setIsUserLoggedIn(true)
-      homeDash()
+      alert("Invalid email or password");
     }
 
+    // reset inputs
+    emailInput.value = "";
+    passwordInput.value = "";
+
   }
-  // offcanvas menu logout - click
+  // Logout User offcanvas menu 
   const logout = async () => {
 
     // if user email exists then do not prompt for feedback and logout
     if (mongodata.some(obj => obj.email === email)) {
 
-      setIsUserLoggedIn(false)
-      setEmail("")
-      setFavs([])
+      setIsUserLoggedIn(false);
+      setEmail("");
+      setFavs([]);
+      window.location.reload();
 
     } else {
-      // if user email does not exist then get user feedback, post and logout
-
+      // if user email does not exist then get user feedback, store in DB and logout
       // user feedback
       const userFeedback = prompt("Before you go, leave a review")
 
@@ -211,20 +263,47 @@ export default function App() {
     }
 
   }
-  //*********************************************** */ header
-  // notification bell icon - click
-  const notificationIcon = (e) => {
-    // update state variable "showList" with component <ListOfNotificaitons />
-    setNotificationList(<ListOfNotifications />)
-    // add/remove list when icon is clicked
-    if (showNotificationList !== null) {
-      setNotificationList(null)
+  // create new user
+  const signUp = async (e) => {
+    // stop page refresh
+    e.preventDefault();
+    console.log(e)
+
+    // get user email, password, first and last name
+    const firstNameInput = e.target[0]
+    const firstName = firstNameInput.value
+    // last name
+    const lastNameInput = e.target[1]
+    const lastName = lastNameInput.value
+    // email
+    const emailInput = e.target[2]
+    const email = emailInput.value
+    // password
+    const passwordInput = e.target[3]
+    const password = passwordInput.value
+
+
+    // validate new user
+    const newUser1 = await newUser({ email, password, firstName, lastName });
+
+    // if status 200, log user in 
+    if (newUser1.status == 201) {
+      // log user in
+      setEmail(email)
+      setIsUserLoggedIn(true)
+      homeDash()
+    } else {
+      alert(newUser1.status + ", " + newUser1.message)
     }
+
+    // reset inputs
+    firstNameInput.value = "";
+    lastNameInput.value = "";
+    emailInput.value = "";
+    passwordInput.value = "";
+
   }
-  // hamburger icon - click
-  const hamburgerIcon = (e) => {
-    setOffCanvasMenu(<OffCanvasMenu showMyAccount={showMyAccount} logout={logout} />)
-  }
+  //******************************************* */ User Dashboard Header
   //  offcanvas menu close - click
   const closeMenu = () => {
     setOffCanvasMenu(null)
@@ -232,45 +311,44 @@ export default function App() {
   // offcanvas menu account - click
   const showMyAccount = (e) => {
     userAccount();
-    setOffCanvasMenu(null)
   }
 
-  //*********************************************** */ navigation
-  // home navigation onClicked  
+  //*************************************** */ User Dashboard navigation
+  // home navigation onClick
   const homeDash = (e) => {
-    // update state - "homeClicked" variable to true to signal main content component 
-    setHomeClicked(true)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "tvSHowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "searchClicked" variable to false to signal main content component 
-    setSearchClicked(false)
+    // update state - "showDashHome" variable to true to signal main content component 
+    setshowDashHome(true)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showSearchDashboard" variable to false to signal main content component 
+    setshowSearchDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  // movie navigation onClicked 
+  // movie navigation onClick 
   const movies = (e) => {
-    // update state - "movieClicked" variable to true to signal main content component 
-    setMovieClicked(true)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "tvSHowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
-    // update state - "searchClicked" variable to false to signal main content component 
-    setSearchClicked(false)
+    // update state - "showMoviesdash" variable to true to signal main content component 
+    setshowMoviesdash(true)
+    // update state - "showDashHome" variable to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
+    // update state - "showSearchDashboard" variable to false to signal main content component 
+    setshowSearchDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  // tvShow navigation onClicked  
+  // tvShow navigation onClick 
   const tvShows = (e) => {
     // update state - "nowPlaying" variable value is tv shows on tv
     setOnTv(onTv)
@@ -278,74 +356,74 @@ export default function App() {
     setPopularTvShow(popularTvShow)
     // update state - "topRated" variable value is top rated tv shows
     setTopRatedTvShow(topRatedTvShow)
-    // update state - "tvSHowClicked" variable to true to signal main content component 
-    setTvShowClicked(true)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "searchClicked" variable to false to signal main content component 
-    setSearchClicked(false)
+    // update state - "showTvdash" variable to true to signal main content component 
+    setshowTvdash(true)
+    // update state - "showDashHome" variable to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showSearchDashboard" variable to false to signal main content component 
+    setshowSearchDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  // heart navigation onClicked 
+  // heart navigation onClick
   const myLikes = (e) => {
-    // update state - "heartClicked" variable to true to signal main content component 
-    setHeartClicked(true)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "tvShowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
-    // update state - "searchClicked" variable to false to signal main content component 
-    setSearchClicked(false)
+    // update state - "showFavoritesDashboard" variable to true to signal main content component 
+    setshowFavoritesDashboard(true)
+    // update state - "showDashHome" variable to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
+    // update state - "showSearchDashboard" variable to false to signal main content component 
+    setshowSearchDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  // search navigation onClicked  
+  // search navigation onClick 
   const search = (e) => {
-    // update state - "searchClicked" variable to true to signal main content component
-    setSearchClicked(true)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "tvSHowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
+    // update state - "showSearchDashboard" variable to true to signal main content component
+    setshowSearchDashboard(true)
+    // update state - "showDashHome" variable to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  // user navigation onClicked  
+  // user navigation onClick
   const userAccount = (e) => {
-    // update state - "userClicked" variable to true to signal main content component 
-    setUserClicked(true)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "tvShowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "searchClicked" variable to true to signal main content component
-    setSearchClicked(false)
+    // update state - "showUserAccountDashboard" variable to true to signal main content component 
+    setshowUserAccountDashboard(true)
+    // update state - "showDashHome" variable to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showSearchDashboard" variable to true to signal main content component
+    setshowSearchDashboard(false)
     // scroll to top of page
     window.scrollTo(0, 0);
   }
-  //********************************************** */ main content
-  // user account - handleOnSubmit 
+  //*************************************** */ User Dashboard main content
+  // user account - handle OnSubmit 
   const updateUserCred = (e) => {
     e.preventDefault()
 
@@ -423,56 +501,138 @@ export default function App() {
     }
   }
   // open movie
-  const openMovie = (backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id) => {
-    // update state - "openMovieClicked" variable to true to signal main content component 
-    setOpenMovieClicked(true)
-    // update state - "userClicked" variable to false to signal main content component 
-    setUserClicked(false)
-    // update state - "homeClicked" variable to false to signal main content component 
-    setHomeClicked(false)
-    // update state - "movieClicked" variable to false to signal main content component 
-    setMovieClicked(false)
-    // update state - "tvShowClicked" variable to false to signal main content component 
-    setTvShowClicked(false)
-    // update state - "heartClicked" variable to false to signal main content component 
-    setHeartClicked(false)
-    // update state - "searchClicked" variable to true to signal main content component
-    setSearchClicked(false)
+  const openMovie = (backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id, voteCount) => {
+    // update state - "showContentDashboard" variable to true to signal main content component 
+    setshowContentDashboard(true)
+    // update state - "showUserAccountDashboard" variable to false to signal main content component 
+    setshowUserAccountDashboard(false)
+    // update state - "showDashHome" boolean to false to signal main content component 
+    setshowDashHome(false)
+    // update state - "showMoviesdash" variable to false to signal main content component 
+    setshowMoviesdash(false)
+    // update state - "showTvdash" variable to false to signal main content component 
+    setshowTvdash(false)
+    // update state - "showFavoritesDashboard" variable to false to signal main content component 
+    setshowFavoritesDashboard(false)
+    // update state - "showSearchDashboard" variable to true to signal main content component
+    setshowSearchDashboard(false)
     // set movie front data
-    setMovieFrontData({ backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id })
+    setMovieFrontData({ backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id, voteCount })
     // scroll to top of page
     window.scrollTo(0, 0);
   }
 
+  // if user is not logged in
   if (!isUserLoggedIn) {
-    // if user is not logged in return
     return (
-      <main className={styles.loggedOutMain} style={{ backgroundImage: `-webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.3)), url("/homepageBG.jpg")`, backgroundSize: "cover" }}>
-        <AppContext.Provider value={{ logginUser }}>
-          <nav>
-            <div>
-              <Image src={"reelBuzzLogo.svg"} width={90} height={100} alt="reel buzz logo" />
+      <main className={styles.loggedOutMain}>
+        <AppContext.Provider value={{ logginUser, signUp, nowPlayingMovies, popularMovies, upComingMovies, topRatedMovies, comingSoonTv, onTv, topRatedTvShow }}>
+          {/* header */}
+          <header>
+            <nav className="navbar py-3 px-3 bg-black" >
+              <div className="container-fluid">
+                <a className="navbar-brand" href="/"><img src={"logoUpdate.svg"} width={150} alt="reel buzz logo" /></a>
+                <ul className="navbar-nav flex-row col-lg-4 justify-content-evenly">
+                  <li className="nav-item me-lg-0">
+                    <a className="nav-link" id="movieMenuItem" href="" ref={linkRefMovies} aria-current="page" onClick={activeMenuItemMovies}>Movies</a>
+                  </li>
+                  <li className="nav-item mx-4">
+                    <a className="nav-link" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
+                  </li>
+                  <li className="d-none d-lg-flex">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                  </li>
+                </ul>
+                {/* search button */}
+                <button type="button" class="btn btn-warning" data-bs-toggle="offcanvas"   data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"}  width={50}/></button>
+                {/* offcanvas */}
+                <div className="offcanvas offcanvas-start bg-dark" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                  {/* offcanvas header */}
+                  <div className="offcanvas-header">
+                    <button type="button" className="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div className="offcanvas-body">
+                    {/* offcanvas body - buttons (sign up/login) */}
+                    <button type="button" className="btn btn-success d-lg-none d-block col-6 mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                    <SearchableList />
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </header>
+          {/******************** Jumbotron ********************/}
+          <div className="d-lg-flex flex-row-reverse justify-content-evenly ps-4 pe-4  bg-black">
+            {/* slide */}
+            <div className="col-lg-4 my-lg-4">
+              {activeMenuItem ? <SlideShow content={nowPlayingMovies} id={"carousel8"} /> : <SlideShow content={onTv} id={"carousel12"} />}
             </div>
-          </nav>
-          <Login />
+            {/* content */}
+            <div className="col-lg-6 d-flex py-5">
+              <div className="w-75 m-auto text-center">
+                <h1 className={styles.jumbotronTitle}>Now Playing</h1>
+                <p className={styles.jumbotronSubHeading}>Watch official Movie and TvShow trailers and more</p>
+                <button type="button" className="btn btn-warning px-5 w-75" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
+              </div>
+            </div>
+          </div>
+          {/****************** * Coming Soon *******************/}
+          {activeMenuItem ? <ComingSoonSlideShow content={upComingMovies} id={"carousel8"} /> : <ComingSoonSlideShow content={comingSoonTv} id={"carousel12"} />}
+          {/******************** Sign Up ********************/}
+          <div className="d-lg-flex px-4 bg-black py-5 justify-content-evenly">
+            {/* slide */}
+            <div className="col-lg-4">
+              {activeMenuItem ? <SlideShow content={topRatedMovies} id={"carousel6"} /> : <SlideShow content={topRatedTvShow} id={"carousel10"} />}
+            </div>
+            {/* content */}
+            <div className="col-lg-6 d-flex ">
+              <div className="w-75 m-auto text-center">
+                <Image className={styles.signUpLogoImg} src={"logoUpdate.svg"} width={300} height={50} alt="reel buzz logo" />
+                <ul className="list-group list-group-flush py-3">
+                  <li className="list-group-item bg-dark text-white">Be the first to watch behind the scenes footage</li>
+                  <li className="list-group-item bg-dark text-white">Save your favorite trailers</li>
+                  <li className="list-group-item bg-dark text-white">Insightful Credits and Roles</li>
+                  <li className="list-group-item bg-dark text-white">Personalize your user dashboard</li>
+                </ul>
+                <button type="button" className="btn btn-warning px-5 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign Up</button>
+              </div>
+            </div>
+          </div>
+          {/******************** Footer ********************/}
+          <footer className="p-2 bg-dark text-white">
+            <div>
+              <p className={`m-0 text-center ${styles.footerP}`}>Copyright &copy; 2026 Reel Buzz. All rights reserved </p>
+            </div>
+          </footer>
+          {/******************** Modal ********************/}
+          <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal-dialog">
+              <div className="modal-content bg-dark">
+                <div className="modal-header">
+                  <p className="text-white m-0 fw-semibold" >The Ultimate HUB: Movie and Tv Show Trailers.</p>
+                  <button id="modalCloseButton" type="button" className="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  <Login />
+                </div>
+              </div>
+            </div>
+          </div>
         </AppContext.Provider>
       </main >
     )
-
   } else {
-    // if user is logged in return
+    // if user is logged in 
     return (
-
       <main className={styles.loggedInMain} style={{ backgroundImage: `-webkit-linear-gradient(rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 0.9)), url("/homepageBG.jpg")`, backgroundSize: "cover" }}>
         <AppContext.Provider value={{
           saveFavorites, removeSavedWidget, openMovie, updateUserCred, onChangeUserImage,
-          notificationIcon, hamburgerIcon, homeDash, movies, tvShows, myLikes, userAccount, closeMenu,
-          search, logout, favs, movieFrontData, preview, nowPlayingMovies, popularMovies, popularTvShow, onTv,
+          homeDash, movies, tvShows, myLikes, userAccount, closeMenu, showMyAccount,
+          search, logout, favs, movieFrontData, preview, nowPlayingMovies, popularMovies, popularTvShow, comingSoonTv, onTv, topRatedTvShow, upComingMovies, topRatedMovies, email,
+          showDashHome, showMoviesdash, showTvdash, showFavoritesDashboard, showSearchDashboard, showUserAccountDashboard, showContentDashboard, profilePicture
+
         }}>
-          <Dash
-            header={{ username, email, profilePicture, showNotificationList, offCanvasMenu }}
-            content={{ homeClicked, movieClicked, tvShowClicked, heartClicked, searchClicked, userClicked, openMovieClicked, nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, onTv, popularTvShow, topRatedTvShow }}
-          />
+          {/* user dashboard */}
+          <Dash />
         </AppContext.Provider>
       </main >
     )
@@ -480,3 +640,5 @@ export default function App() {
   }
 
 }
+
+

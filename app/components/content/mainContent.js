@@ -1,90 +1,103 @@
 'use client'
+import { useContext } from "react";
+// context object (app state)
+import { AppContext } from "../context/context";
 // components
-import NowPlaying from "../movies/nowPlaying/nowPlaying"
-import Popular from "../movies/popular/popular"
-import TopRated from "../movies/topRated/topRated"
 import Search from "./search/search"
-import UpComing from "../movies/upComing/upComing"
 import Favs from "./favs/favs";
 import MovieFront from "./movieFront/movieFront"
 import Account from "./account/account"
 import ShowCase from "@/app/components/showCase/showCase"
+import Slide from "../Slide/slide"
 
 export default function MainContent(props) {
-    // ************************************************** variables
+    // context object (app state)
+    const app = useContext(AppContext)
+    // ************************************************** movies and series(arrays)
     // array of now playing movies
-    const nowPlayingMovies = props.playing[0]
+    const nowPlayingMovies = app.nowPlayingMovies
     // array of popular movies
-    const popularMovies = props.playing[1]
+    const popularMovies = app.popularMovies
     // array of top rated movies
-    const topRatedMovies = props.playing[2]
+    const topRatedMovies = app.topRatedMovies
     // array of upcoming movies 
-    const upComingMovies = props.playing[3]
+    const upComingMovies = app.upComingMovies;
     // array of shows currently on tv
-    const onTv = props.playing[4]
+    const onTv = app.onTv;
     // array of popular tv show
-    const popularTvShows = props.playing[5]
+    const comingSoonTv = app.comingSoonTv;
     //array of top rated tv shows
-    const topRatedTvShows = props.playing[6]
+    const topRatedTvShows = app.topRatedTvShow;
+    // ************************************************** dashboard navigation selection (booleans)
+    const showHomeDashboard = app.showDashHome;
+    const showMoviesDashboard = app.showMoviesdash;
+    const showTvDashboard = app.showTvdash
+    const showFavoritesDashboard = app.showFavoritesDashboard
+    const showSearchDashboard = app.showSearchDashboard
+    const showAccountDashboard = app.showUserAccountDashboard;
+    const showContentDashboard = app.showContentDashboard
+    
     // ************************************************** render
     switch (true) {
-        case props.navSelection[0]:
+        case showHomeDashboard:
             // home 
             return (
                 <section>
                     {/* container */}
                     <div>
-                        <ShowCase movies={popularMovies} tvShows={onTv}/>
-                        <NowPlaying isTvShow={true} movies={onTv} />
-                        <NowPlaying movies={nowPlayingMovies} />
-                        <Popular isTvShow={true} movies={popularTvShows} />
-                        <Popular movies={popularMovies} />
+                        <ShowCase movies={popularMovies} tvShows={onTv} />
+                        <Slide data={onTv} slideTitle={"Series On Tv"} />
+                        <Slide data={nowPlayingMovies} slideTitle={"Movies In Theaters"}/>
+                        <Slide data={comingSoonTv} slideTitle={"Series Coming Soon"} />
+                        <Slide data={popularMovies} slideTitle={"Popular Movies"} />
                     </div>
                 </section>
             );
-        case props.navSelection[1]:
+      
+
+        case showMoviesDashboard:
             // movies 
             return (
                 <section>
                     {/* container */}
                     <div>
                         <ShowCase movies={popularMovies} />
-                        <NowPlaying movies={nowPlayingMovies} />
-                        <UpComing movies={upComingMovies} />
-                        <Popular movies={popularMovies} />
-                        <TopRated movies={topRatedMovies} />
+                        <Slide data={nowPlayingMovies} slideTitle={"In Theaters"} />
+                        <Slide data={upComingMovies} slideTitle={"Coming Soon"} />
+                        <Slide data={popularMovies} slideTitle={"Most Popular"} />
+                        <Slide data={topRatedMovies} slideTitle={"Top Rated"} />
                     </div>
                 </section>
             );
-        case props.navSelection[2]:
+        case showTvDashboard:
             // tv shows 
             return (
                 <section>
                     {/* container */}
                     <div>
-                        <ShowCase tvShows={popularTvShows}  />
-                        <NowPlaying isTvShow={true} movies={onTv} />
-                        <TopRated isTvShow={true} movies={topRatedTvShows} />
-                        <Popular isTvShow={true} movies={popularTvShows} />
+                        <ShowCase tvShows={comingSoonTv} />
+                        <Slide data={onTv} slideTitle={"On Tv"} />
+                        <Slide data={topRatedTvShows} slideTitle={"Top Rated"} />
+                        <Slide data={comingSoonTv} slideTitle={"Coming Soon"} />
                     </div>
                 </section>
             );
-        case props.navSelection[3]:
+        case showFavoritesDashboard:
             // favorites
             return (
                 <Favs />
             );
-        case props.navSelection[4]:
+        case  showSearchDashboard:
             // search
             return (
                 <Search />
             )
-        case props.navSelection[5]:
+        case showAccountDashboard:
             // user account
             return (
                 <Account />
             )
-        case props.navSelection[6]:
+        case showContentDashboard:
             // movie or tv show front page
             return (
                 <MovieFront />

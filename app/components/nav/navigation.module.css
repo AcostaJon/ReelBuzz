@@ -1,6 +1,9 @@
 /* navigtion */
 .nav {
     background-color: rgba(65, 3, 3, 0.95);
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
 }
 
 /* navigation container */
@@ -72,14 +75,14 @@
         height: 90%;
     }
 
-    .nav ul li{
+    .nav ul li {
         display: flex;
         align-items: center;
     }
 
     /* user icon */
     .nav ul li:last-of-type {
-        display:flex;
+        display: flex;
     }
 
     /* list item p tags */

@@ -1,24 +1,23 @@
-// get top rated movies
+// route handler: get top rated movies
 export async function GET() {
-
-    // options object
+    // TMDB options object
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmRhOTY1NGRlYmVhNDI2Y2UwMDg2MDQwYzBlNThmZiIsInN1YiI6IjY2NzE4YzQ4ZjNmODZjMGYwZDNmMGU4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OqnjOW-CaBf_Rjq3q1Y55mJ-T-Tru9VlM2-rOyuJuTo'
+            Authorization: `Bearer ${process.env.TMDB_SECRET_KEY}`
         }
     };
 
     // run
     try {
 
-        // get top rated movies and return data to res variable
-        const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options).then((data) => {
+        // fetch top rated movies 
+        const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US', options).then((data) => {
             return data.json()
         })
 
-        // return promise
+        // return top rated movies
         return Response.json(res);
 
     } 

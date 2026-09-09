@@ -38,7 +38,7 @@ export default function ShowCase(props) {
                         <ShowCaseWidget backgroundImg={show.poster_path} id={show.id}
                             title={show.title} name={show.name}
                             releaseDate={show.release_date} firstAir={show.first_air_date} adult={show.adult}
-                            overview={show.overview} rating={show.vote_average} />
+                            overview={show.overview} rating={show.vote_average} voteCount={show.vote_count}/>
 
                     </li>
                 )}

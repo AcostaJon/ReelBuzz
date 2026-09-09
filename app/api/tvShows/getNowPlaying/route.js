@@ -1,23 +1,22 @@
-// get now playing tv shows
+// route handler: get now playing tv shows
 export async function GET() {
-
-    // options object
+    //TMDB  options object
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmRhOTY1NGRlYmVhNDI2Y2UwMDg2MDQwYzBlNThmZiIsInN1YiI6IjY2NzE4YzQ4ZjNmODZjMGYwZDNmMGU4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OqnjOW-CaBf_Rjq3q1Y55mJ-T-Tru9VlM2-rOyuJuTo'
+            Authorization: `Bearer ${process.env.TMDB_SECRET_KEY}`
         }
     };
 
     // run
     try {
-        // get tv show currently on air and return data to res variable
-        const res = await fetch('https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1', options).then((data) => {
+        // fetch tv show currently on air
+        const res = await fetch('https://api.themoviedb.org/3/tv/airing_today?language=en-US', options).then((data) => {
             return data.json();
         })
 
-        // return promise
+        // return tv show currently on air
         return Response.json(res)
 
     }

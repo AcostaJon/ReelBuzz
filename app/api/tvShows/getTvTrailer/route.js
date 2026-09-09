@@ -1,24 +1,32 @@
-// Post, get tv show trailer
+//route handler: get tv show trailer using the show ID
 export async function POST(id) {
-    // extract data passed to post function
+    // extract tv show ID 
     const tvId = await id.json();
 
-    // options object
+    // TMDB options object
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYmRhOTY1NGRlYmVhNDI2Y2UwMDg2MDQwYzBlNThmZiIsIm5iZiI6MTcyMzA1MDYxNy43OTc5NjcsInN1YiI6IjY2NzE4YzQ4ZjNmODZjMGYwZDNmMGU4MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oJyKUCjEShOivIbrQDWlbmpJ3keg5QSD5LbyJ4xlQkA'
+            Authorization: `Bearer ${process.env.TMDB_TRAILER_KEY}`
         }
     };
     // run
     try {
-        const res = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/videos?language=en-US`, options).then((data) => {
+        // fetch tv show trailer
+        const trailers = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/videos?language=en-US`, options).then((data) => {
             return data.json()
         })
-        //   return response
-        return Response.json(res);
+        // fetch series credits 
+        const credits = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/credits`, options).then((data) => {
+            return data.json()
+        })
 
+        // return tv trailer and credits
+        return Response.json({
+            trailer: trailers,
+            credits: credits
+        });
     }
     // catch and throw any errors
     catch (error) {
