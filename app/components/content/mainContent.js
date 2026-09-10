@@ -53,8 +53,6 @@ export default function MainContent(props) {
                     </div>
                 </section>
             );
-      
-
         case showMoviesDashboard:
             // movies 
             return (

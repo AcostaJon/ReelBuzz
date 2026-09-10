@@ -63,7 +63,7 @@ export default function Search() {
         return (
             <section className={styles.searchSection} >
                 {/* search input */}
-                <form onSubmit={search} onChange={onChange} className={styles.inputContainer} >
+                <form onSubmit={search} onChange={onChange} className={styles.form} >
                     <input type="text" placeholder="Live Search " />
                 </form>
                 {/* show all movies and shows */}

@@ -1,11 +1,11 @@
 /* search section */
 .searchSection{
-    margin-top: 65px;
+    margin-top: 20px;
 }
-/* input container */
-.inputContainer{
-    margin-top: 8px;
+/* form */
+.searchSection form{
     text-align: center;
+    margin-bottom: 8px;
 }
 /* search input */
 .searchSection input {

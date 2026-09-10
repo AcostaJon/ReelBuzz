@@ -529,33 +529,47 @@ export default function App() {
         <AppContext.Provider value={{ logginUser, signUp, nowPlayingMovies, popularMovies, upComingMovies, topRatedMovies, comingSoonTv, onTv, topRatedTvShow }}>
           {/* header */}
           <header>
-            <nav className="navbar py-3 px-3 bg-black" >
-              <div className="container-fluid">
+            <nav className="navbar py-3 px-3 px-lg-5 bg-black" >
+              <div className="d-flex justify-content-between w-100">
+                {/* logo */}
                 <a className="navbar-brand" href="/"><img src={"logoUpdate.svg"} width={150} alt="reel buzz logo" /></a>
-                <ul className="navbar-nav flex-row col-lg-4 justify-content-evenly">
+                  {/* nav links (movies and series) display on large devices, hide on mobile */}
+                <ul className="navbar-nav d-none d-lg-flex flex-row justify-content-evenly w-100">
                   <li className="nav-item me-lg-0">
-                    <a className="nav-link" id="movieMenuItem" href="" ref={linkRefMovies} aria-current="page" onClick={activeMenuItemMovies}>Movies</a>
+                    <a className="nav-link text-white" id="movieMenuItem" href="" ref={linkRefMovies} aria-current="page" onClick={activeMenuItemMovies}>Movies</a>
                   </li>
                   <li className="nav-item mx-4">
-                    <a className="nav-link" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
+                    <a className="nav-link text-white" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
                   </li>
                   <li className="d-none d-lg-flex">
                     <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
                   </li>
                 </ul>
                 {/* search button */}
-                <button type="button" className="btn btn-warning" data-bs-toggle="offcanvas"   data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"}  width={50}/></button>
-                {/* offcanvas */}
-                <div className="offcanvas offcanvas-start bg-dark" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                  {/* offcanvas header */}
-                  <div className="offcanvas-header">
-                    <button type="button" className="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div className="offcanvas-body">
-                    {/* offcanvas body - buttons (sign up/login) */}
-                    <button type="button" className="btn btn-success d-lg-none d-block col-6 mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
-                    <SearchableList />
-                  </div>
+                <button type="button" className="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"} width={50} /></button>
+              </div>
+              {/* nav links (movies and series) display on mobile, hide on large devices */}
+              <ul className="navbar-nav d-lg-none flex-row col-lg-4 justify-content-evenly w-100">
+                <li className="nav-item me-lg-0">
+                  <a className="nav-link text-white" id="movieMenuItem" href="" ref={linkRefMovies} aria-current="page" onClick={activeMenuItemMovies}>Movies</a>
+                </li>
+                <li className="nav-item mx-4">
+                  <a className="nav-link text-white" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
+                </li>
+                <li className="d-none d-lg-flex">
+                  <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                </li>
+              </ul>
+              {/* offcanvas */}
+              <div className="offcanvas offcanvas-start bg-dark" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                {/* offcanvas header */}
+                <div className="offcanvas-header">
+                  <button type="button" className="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div className="offcanvas-body">
+                  {/* offcanvas body - buttons (sign up/login) */}
+                  <button type="button" className="btn btn-success d-lg-none d-block col-6 mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                  <SearchableList />
                 </div>
               </div>
             </nav>
@@ -586,7 +600,7 @@ export default function App() {
             {/* content */}
             <div className="col-lg-6 d-flex ">
               <div className="w-75 m-auto text-center">
-                <Image className={styles.signUpLogoImg} src={"logoUpdate.svg"} width={300} height={50} alt="reel buzz logo" />
+                <Image className={styles.signUpLogoImg} src={"logoUpdate.svg"} width={275} height={50} alt="reel buzz logo" />
                 <ul className="list-group list-group-flush py-3">
                   <li className="list-group-item bg-dark text-white">Be the first to watch behind the scenes footage</li>
                   <li className="list-group-item bg-dark text-white">Save your favorite trailers</li>
@@ -598,9 +612,9 @@ export default function App() {
             </div>
           </div>
           {/******************** Footer ********************/}
-          <footer className="p-2 bg-dark text-white">
+          <footer className="p-3 bg-dark text-white">
             <div>
-              <p className={`m-0 text-center ${styles.footerP}`}>Copyright &copy; 2026 Reel Buzz. All rights reserved </p>
+              <p className={`m-0 text-center ${styles.footerP}`}>&copy; 2026 Reel Buzz. All rights reserved </p>
             </div>
           </footer>
           {/******************** Modal ********************/}
