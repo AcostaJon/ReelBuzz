@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ReelBuzz 🎬
 
-## Getting Started
+**ReelBuzz** is a sleek, responsive web application built to serve as a central hub for official movie and TV show trailers. Designed with performance and user experience in mind, ReelBuzz allows users to seamlessly discover, search, and watch the latest high-definition trailers across films and television series in a unified single-page interface.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Trailer Hub:** Browse top trending, upcoming, and popular movie and TV show trailers.
+- **Single-Page Application (SPA):** Instant navigation and fluid user interface powered by Next.js and React.
+- **Responsive Layout:** Tailored layout for mobile, tablet, and desktop viewports using Bootstrap grid and custom components.
+- **Fast Search & Filter:** Dynamic client-side filtering to quickly locate specific titles or genres.
+- **Embedded HD Video Player:** Watch high-quality official trailers directly within the platform.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🛠️ Tech Stack
 
-## Learn More
+- **Framework:** [Next.js](https://nextjs.org/) (React)
+- **UI Library / Styling:** [Bootstrap](https://getbootstrap.com/) & Custom CSS
+- **Icons:** [Bootstrap Icons](https://icons.getbootstrap.com/)
+- **Data Source / API:** Integration with movie/TV database APIs (https://www.themoviedb.org/)
+- **DataBase:** [MongoDB](https://www.mongodb.com/)
+- **Deployment:** Vercel
 
-To learn more about Next.js, take a look at the following resources:
+---
+Screenshots
+<img width="1000" height="888" alt="Screenshot (73)" src="https://github.com/user-attachments/assets/ca275939-0fc4-4fce-a82f-1c40f74f1c11" />
+<img width="1076" height="944" alt="Screenshot (74)" src="https://github.com/user-attachments/assets/43aabd58-ebfa-45a5-99e0-d9bd9380a2e6" />
+<img width="1078" height="949" alt="Screenshot (75)" src="https://github.com/user-attachments/assets/cf9a6aa2-42d6-4431-aaff-9939b483c780" />
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
