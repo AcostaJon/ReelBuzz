@@ -21,7 +21,7 @@
 - **Icons:** [Bootstrap Icons](https://icons.getbootstrap.com/)
 - **Data Source / API:** Integration with movie/TV database APIs (https://www.themoviedb.org/)
 - **DataBase:** [MongoDB](https://www.mongodb.com/)
-- **Deployment:** Vercel
+- **Deployment:** Vercel (https://reel-buzz.vercel.app/)
 
 ---
 Screenshots
