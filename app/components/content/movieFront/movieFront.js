@@ -11,7 +11,8 @@ export default function MovieFront() {
     //************************************************************************* * state
     const [trailer, setTrailer] = useState({});
     const [credits, setCredits] = useState();
-
+    // variable with value of zero
+    let n = 0
     // context object (app data)
     const app = useContext(AppContext);
     //************************************************************************* * use effect
@@ -25,7 +26,7 @@ export default function MovieFront() {
                     // cast members
                     const cast = promise.credits.cast;
                     // return "official trailer" from array of trailers
-                    const officialTrailer = trailers.filter(video => video.name === "Official Trailer")
+                    const officialTrailer = trailers.filter(video => video.name.includes("Official"))
                     setTrailer(officialTrailer[0]);
                     setCredits(cast);
                 })
@@ -37,10 +38,10 @@ export default function MovieFront() {
                 .then((promise) => {
                     // all trailers
                     const arr = promise.trailer.results;
+                    // return "official trailer" from array of trailers
+                    const officialTrailer = arr.filter(video => video.name.includes("Official"))
                     // cast members
                     const cast = promise.credits.cast;
-                    // return "official trailer" from array of trailers
-                    const officialTrailer = arr.filter(video => video.name === "Official Trailer")
                     setTrailer(officialTrailer[0]);
                     setCredits(cast);
                 })
@@ -52,7 +53,7 @@ export default function MovieFront() {
         const res = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(id)
         })
@@ -80,12 +81,12 @@ export default function MovieFront() {
     return (
         <section className={styles.MovieFrontSection}>
             {/* trailer */}
-            <div className={styles.mediaContainer}>
+            <div>
                 {/* trailer and background image */}
                 {/* ternary operation - if app context containes video(trailer) return video(trailer), if not return image */}
-                {trailer ? <ReactPlayer
-                    width='100%'
-                    height='360px'
+                {(trailer) ? <ReactPlayer
+                    width="100%"
+                    height="60vh"
                     url={`https://www.youtube.com/watch?v=${trailer.key}`}
                     controls />
                     :
@@ -93,8 +94,8 @@ export default function MovieFront() {
                     </div>
                 }
             </div>
-            {/* content */}
-            <div className='px-3 pt-4'>
+            {/* content info */}
+            <div className='px-3 py-4'>
                 {/* header */}
                 <div className='d-flex align-items-center'>
                     {/* title/date */}
@@ -102,7 +103,7 @@ export default function MovieFront() {
                         {/* app.title or name */}
                         <h3 className='mb-0 fw-bold'>{app.movieFrontData.title ? app.movieFrontData.title : app.movieFrontData.name}</h3>
                         {/* app.release_date */}
-                        <p className='text-white-50 ms-2 mb-0'>{app.movieFrontData.releaseDate ? <sub>{formatDate(app.movieFrontData.releaseDate)}</sub>: <sub>{formatDate(app.movieFrontData.firstAir)}</sub>}</p>
+                        <p className='text-white-50 ms-1 mb-0'>{app.movieFrontData.releaseDate ? <sub>{formatDate(app.movieFrontData.releaseDate)}</sub> : <sub>{formatDate(app.movieFrontData.firstAir)}</sub>}</p>
                     </div>
                     {/* rating */}
                     <div className='col-4'>
@@ -122,7 +123,7 @@ export default function MovieFront() {
                         <h1 className='fw-bold'>Cast</h1>
                         {
                             credits?.map((actor) =>
-                                <div className="col-5 col-lg-3 me-lg-1 d-flex align-items-center border rounded-5 border-start-0 border-bottom-0 px-0 bg-black ">
+                                <div key={n++} className="col-5 col-lg-3 me-lg-1 d-flex align-items-center border rounded-5 border-start-0 border-bottom-0 px-0 bg-black ">
                                     <div>
                                         <img className='img-fluid rounded-circle border border-primary' src={"https://image.tmdb.org/t/p/w500/" + actor.profile_path} width={50} />
                                     </div>

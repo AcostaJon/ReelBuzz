@@ -26,9 +26,12 @@ export default function Favs() {
             <ul>
                 {
                     app.favs.map((movie) =>
-                    // list item "movie widget"
+                        // list item "movie widget"
                         <li key={n++}>
-                            <SavedMovieWidget backgroundImg={movie.movieBG} title={movie.title} name={movie.name} />
+                            <SavedMovieWidget backgroundImg={movie.movieBG} id={movie.id}
+                                title={movie.title} name={movie.name}
+                                releaseDate={movie.releaseDate} firstAir={movie.firstAir} adult={movie.adult}
+                                description={movie.description} rating={movie.rating} voteCount={movie.voteCount} />
                             <p>{movie.title ? movie.title : movie.name}</p>
                         </li>
                     )

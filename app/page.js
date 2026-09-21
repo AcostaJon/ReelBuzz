@@ -235,26 +235,23 @@ export default function App() {
 
     // if user email exists then do not prompt for feedback and logout
     if (mongodata.some(obj => obj.email === email)) {
-
       setIsUserLoggedIn(false);
       setEmail("");
       setFavs([]);
       window.location.reload();
-
     } else {
       // if user email does not exist then get user feedback, store in DB and logout
+
       // user feedback
       const userFeedback = prompt("Before you go, leave a review")
-
+      
       // user review
       const review = {
         email: email,
         review: userFeedback
       }
-
       // post user review
       await postUserFeedback(review);
-
       // logout
       setIsUserLoggedIn(false);
       setEmail("");
@@ -267,8 +264,6 @@ export default function App() {
   const signUp = async (e) => {
     // stop page refresh
     e.preventDefault();
-    console.log(e)
-
     // get user email, password, first and last name
     const firstNameInput = e.target[0]
     const firstName = firstNameInput.value
@@ -304,10 +299,6 @@ export default function App() {
 
   }
   //******************************************* */ User Dashboard Header
-  //  offcanvas menu close - click
-  const closeMenu = () => {
-    setOffCanvasMenu(null)
-  }
   // offcanvas menu account - click
   const showMyAccount = (e) => {
     userAccount();
@@ -406,7 +397,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }
   // user navigation onClick
-  const userAccount = (e) => {
+  const userAccount = () => {
     // update state - "showUserAccountDashboard" variable to true to signal main content component 
     setshowUserAccountDashboard(true)
     // update state - "showDashHome" variable to false to signal main content component 
@@ -454,7 +445,7 @@ export default function App() {
     reader.readAsDataURL(file);
   }
   // save movies to FAVS
-  const saveFavorites = (e, title, name) => {
+  const saveFavorites = (e, backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id, voteCount) => {
     // stop page from loading
     e.stopPropagation();
     // heart icon from navigation
@@ -471,7 +462,7 @@ export default function App() {
     const movieBG = movie.style.backgroundImage.substr(movie.style.backgroundImage.indexOf('url'), 250)
 
     // update state - favs array with movie object
-    setFavs([...favs, { movieBG, title, name }])
+    setFavs([...favs, {movieBG,  backgroundImg, title, name, releaseDate, firstAir, rating, description, adult, id, voteCount}])
 
     // if title is returned from user click then alert user
     if (title != undefined) {
@@ -485,15 +476,17 @@ export default function App() {
     // add "grow-shrink" affect to heart icon
     heartIcon.classList.add("bounce");
   }
-  // remove saved movie widget
-  const removeSavedWidget = (e, title, name) => {
-    const remove = e.target.parentElement.parentElement;
-    const removeBG = remove.style.backgroundImage.substr(remove.style.backgroundImage.indexOf('url'), 250)
+  // remove saved content
+  const removeSavedWidget = (e, title, name, id) => {
+    // stop page load
+    e.stopPropagation();
+    // selected movie/show
+    const targetContent = id;
     // remove deleted widget from favs
     setFavs((movies) => {
-      return movies.filter((movie) => removeBG != movie.movieBG)
+      return movies.filter((movie) => targetContent != movie.id)
     })
-    // if title is returned alert user
+    // alert user "title/name" was removed
     if (title != undefined) {
       alert(title + " | Removed ")
     } else {
@@ -542,11 +535,11 @@ export default function App() {
                     <a className="nav-link text-white" id="tvShowMenuItem" href="" ref={linkRefTvShow} onClick={activeMenuItemTvShows}>Tv Shows</a>
                   </li>
                   <li className="d-none d-lg-flex">
-                    <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                    <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp | Login</button>
                   </li>
                 </ul>
                 {/* search button */}
-                <button type="button" className="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" > <img className="navbar-toggler border border-0" src={"magnifyingGlass.svg"} width={50} /></button>
+                <button type="button" className="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" >     <span className="navbar-toggler-icon"></span></button>
               </div>
               {/* nav links (movies and series) display on mobile, hide on large devices */}
               <ul className="navbar-nav d-lg-none flex-row col-lg-4 justify-content-evenly w-100">
@@ -568,7 +561,7 @@ export default function App() {
                 </div>
                 <div className="offcanvas-body">
                   {/* offcanvas body - buttons (sign up/login) */}
-                  <button type="button" className="btn btn-success d-lg-none d-block col-6 mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp/Login</button>
+                  <button type="button" className="btn btn-success d-lg-none d-block col-6 mx-auto mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">SignUp | Login</button>
                   <SearchableList />
                 </div>
               </div>
@@ -581,10 +574,10 @@ export default function App() {
               {activeMenuItem ? <SlideShow content={nowPlayingMovies} id={"carousel8"} /> : <SlideShow content={onTv} id={"carousel12"} />}
             </div>
             {/* content */}
-            <div className="col-lg-6 d-flex py-5">
+            <div className="col-lg-6 d-flex pt-4 pb-5 py-lg-0">
               <div className="w-75 m-auto text-center">
-                <h1 className={styles.jumbotronTitle}>Now Playing</h1>
-                <p className={styles.jumbotronSubHeading}>Watch official Movie and TvShow trailers and more</p>
+                <h1 className={styles.jumbotronTitle}>Every Preview, One Stage</h1>
+                <p className={styles.jumbotronSubHeading}>One Hub for Official Trailers</p>
                 <button type="button" className="btn btn-warning px-5 w-75" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
               </div>
             </div>
@@ -602,9 +595,9 @@ export default function App() {
               <div className="w-75 m-auto text-center">
                 <Image className={styles.signUpLogoImg} src={"logoUpdate.svg"} width={275} height={50} alt="reel buzz logo" />
                 <ul className="list-group list-group-flush py-3">
-                  <li className="list-group-item bg-dark text-white">Be the first to watch behind the scenes footage</li>
-                  <li className="list-group-item bg-dark text-white">Save your favorite trailers</li>
-                  <li className="list-group-item bg-dark text-white">Insightful Credits and Roles</li>
+                  <li className="list-group-item bg-dark text-white">Watch official trailers</li>
+                  <li className="list-group-item bg-dark text-white">Save your favorites</li>
+                  <li className="list-group-item bg-dark text-white">Insightful credits and roles</li>
                   <li className="list-group-item bg-dark text-white">Personalize your user dashboard</li>
                 </ul>
                 <button type="button" className="btn btn-warning px-5 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign Up</button>
@@ -640,7 +633,7 @@ export default function App() {
       <main className={styles.loggedInMain} style={{ backgroundImage: `-webkit-linear-gradient(rgba(10, 10, 10, 0.9), rgba(5, 5, 5, 0.9)), url("/homepageBG.jpg")`, backgroundSize: "cover" }}>
         <AppContext.Provider value={{
           saveFavorites, removeSavedWidget, openMovie, updateUserCred, onChangeUserImage,
-          homeDash, movies, tvShows, myLikes, userAccount, closeMenu, showMyAccount,
+          homeDash, movies, tvShows, myLikes, userAccount, showMyAccount,
           search, logout, favs, movieFrontData, preview, nowPlayingMovies, popularMovies, popularTvShow, comingSoonTv, onTv, topRatedTvShow, upComingMovies, topRatedMovies, email,
           showDashHome, showMoviesdash, showTvdash, showFavoritesDashboard, showSearchDashboard, showUserAccountDashboard, showContentDashboard, profilePicture
 

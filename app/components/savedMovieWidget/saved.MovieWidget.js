@@ -12,12 +12,18 @@ export default function SavedMovieWidget(props) {
     // background image
     const bg = props.backgroundImg;
     // ****************************************************************** events
+    // handle close
     const handleRemove = (e) => {
-        app.removeSavedWidget(e, props.title, props.name)
+        app.removeSavedWidget(e, props.title, props.name, props.id)
     }
 
+    // // handle open
+    const handleOpenMovie = () => {
+        app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.description, props.adult, props.id, props.voteCount)
+    }
+    
     return (
-        <div className={styles.SavedMovieDiv} style={{ backgroundImage: bg }}>
+        <div className={styles.SavedMovieDiv} style={{ backgroundImage: bg }} onClick={handleOpenMovie}>
             {/* saved movie box */}
             <div onClick={handleRemove}>
                 <p>x</p>

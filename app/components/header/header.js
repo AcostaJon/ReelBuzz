@@ -2,7 +2,7 @@
 'use client'
 // react 
 import Image from 'next/image'
-import { useContext } from 'react'
+import { useContext} from 'react'
 // context api
 import { AppContext } from '../context/context'
 // css
@@ -53,19 +53,19 @@ export default function Header() {
                     </div>
                     {/* logout button */}
                     <button className='d-none d-lg-block btn btn-danger' onClick={logout} type='button'>Logout</button>
-                    {/* toggle button for mobile */}
+                    {/* toggle offcanvas menu button for mobile */}
                     <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     {/* offcanvas menu */}
-                    <div className="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div className="offcanvas offcanvas-end bg-dark" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div className="offcanvas-header">
                             <Image src={logo} width={90} height={100} alt="reel buzz logo" />
                             <button type="button" className="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body">
                             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <button className='p-3 mb-2 btn btn-warning border border-top-0' onClick={userAccount}>Account</button>
+                                <button className='p-3 mb-2 btn btn-warning border border-top-0' onClick={userAccount} data-bs-dismiss="offcanvas">Account</button>
                                 <button className='p-3 mb-2 btn btn-warning border border-top-0' onClick={logout} type='button'>Logout</button>
                             </ul>
                         </div>

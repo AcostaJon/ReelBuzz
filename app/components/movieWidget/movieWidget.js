@@ -12,13 +12,15 @@ export default function MovieWidget(props) {
     const app = useContext(AppContext)
 
     // ************************************************************ events
-    // handle save movie
+    // handle save
     const handleSaveMovie = (e) => {
-        app.saveFavorites(e, props.title, props.name)
+        // return all movie/show data to handler
+        app.saveFavorites(e, props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.description, props.adult, props.id, props.voteCount)
     }
 
-    // handle open movie
-    const handleOpenMovie = (e) => {
+    // handle open 
+    const handleOpenMovie = () => {
+        // return all movie/show data to handler
         app.openMovie(props.backgroundImg, props.title, props.name, props.releaseDate, props.firstAir, props.rating, props.description, props.adult, props.id, props.voteCount)
     }
 

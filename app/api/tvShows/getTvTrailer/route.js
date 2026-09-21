@@ -8,7 +8,7 @@ export async function POST(id) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${process.env.TMDB_TRAILER_KEY}`
+            Authorization: `Bearer ${process.env.TMDB_TRAILER_KEY}`,
         }
     };
     // run
@@ -21,6 +21,7 @@ export async function POST(id) {
         const credits = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/credits`, options).then((data) => {
             return data.json()
         })
+        console.log(trailers)
 
         // return tv trailer and credits
         return Response.json({
